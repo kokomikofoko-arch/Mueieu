@@ -18,6 +18,7 @@
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
+            padding: 40px 0; /* เพิ่มพื้นที่ด้านบนล่างเวลาเลื่อนจอ */
         }
 
         /* ✨ ตกแต่งสไตล์มินิมอลด้วยไอคอนลอยนุ่มๆ */
@@ -26,7 +27,7 @@
             position: absolute;
             font-size: 80px;
             color: rgba(174, 214, 241, 0.25);
-            top: 10%;
+            top: 5%;
             left: 10%;
             pointer-events: none;
         }
@@ -47,7 +48,7 @@
             -webkit-backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.9);
             border-radius: 35px;
-            padding: 45px 30px;
+            padding: 40px 25px;
             width: 85%;
             max-width: 400px;
             text-align: center;
@@ -56,7 +57,7 @@
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* ☁️ ไอคอนกล่องข้อความหลักด้านบนสุด (ลอยได้ ดุ๊กดิ๊ก) */
+        /* ☁️ ไอคอนกล่องข้อความหลักด้านบนสุด */
         .header-icon {
             font-size: 64px;
             margin-bottom: 10px;
@@ -79,9 +80,6 @@
             margin-top: 10px;
             margin-bottom: 8px;
             letter-spacing: 1px;
-            border: none;
-            background: none;
-            padding: 0;
         }
 
         .subtitle {
@@ -98,7 +96,7 @@
             margin: 25px 0;
         }
 
-        /* 🧺 เมนูกล่องพรีเมียม ขอบเรืองแสงบางๆ */
+        /* 🧺 เมนูกล่องพรีเมียม */
         ul {
             list-style: none;
             padding: 0;
@@ -159,6 +157,27 @@
             box-shadow: 0 10px 25px rgba(90, 161, 227, 0.55);
         }
 
+        /* 💬 ปรับแต่งหน้าตากล่องคอมเมนต์ HTML Comment Box ให้น่ารักเข้ากับธีม */
+        .comment-section {
+            margin-top: 25px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            border-radius: 24px;
+            border: 1px solid #d4ebf7;
+            text-align: left;
+        }
+        .comment-section h3 {
+            font-size: 16px;
+            color: #5aa1e3;
+            margin-top: 0;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+        /* ซ่อนหน้าตาเดิมๆ บางจุดเพื่อความสวยคลีน */
+        #HCB_comment_box { font-family: 'Kanit', sans-serif !important; }
+        #HCB_comment_box a { color: #5aa1e3 !important; }
+        #HCB_comment_box .hcb-shadow { border-radius: 15px !important; }
+
         /* ☁️ ระบบจัดการหน้า */
         .page { display: none; }
         .page.active { display: block; }
@@ -197,7 +216,7 @@
             <button class="btn" onclick="showPage('page-2')">𓊆 Go to Game IDs 𓊇</button>
         </div>
 
-        <!-- 🎮 หน้าที่ 2: ไอดีเกม -->
+        <!-- 🎮 หน้าที่ 2: ไอดีเกม + สมุดเยี่ยมชม -->
         <div id="page-2" class="page">
             <div style="font-size: 32px; margin-bottom: 10px;">🎮</div>
             <h2>𓊆 My Game IDs 𓊇</h2>
@@ -205,13 +224,34 @@
             <hr>
             <ul>
                 <li><span class="emoji">🧱</span> <strong>Roblox :</strong> komi_ko24 , g9995h1n</li>
-                <li><span class="emoji">🔥</span> <strong>Free Fire :</strong> Sentakna</li>
+                <li><span class="emoji">🔥</span> <strong>Free Fire :</strong> Senrakna</li>
                 <li><span class="emoji">⚔️</span> <strong>RoV :</strong> 𝔖𝔢𝔑𝔎𝔞@𝔯𝔦𝔡𝔢</li>
                 <li><span class="emoji">⛏️</span> <strong>Minecraft :</strong> SeNkA4032</li>
                 <li><span class="emoji">🏡</span> <strong>Heartopia :</strong> Uid 361rde9f</li>
             </ul>
             <hr>
-            <button class="btn" onclick="showPage('page-intro')">𓊆 Back to Home 𓊇</button>
+
+            <!-- 💬 กล่องสมุดเยี่ยมชม (Guestbook) ของจริงพิมพ์คุยกันได้เลย! -->
+            <div class="comment-section">
+                <h3>໒꒰ྀི 💬 Guestbook ꒱ྀི১</h3>
+                <!-- เริ่มโค้ด HTML Comment Box -->
+                <div id="HCB_comment_box"><a href="http://www.htmlcommentbox.com">HTML Comment Box</a> is loading comments...</div>
+                <link rel="stylesheet" type="text/css" href="https://www.htmlcommentbox.com/static/style/skin/simple/skin.css" />
+                <script type="text/javascript" id="hcb"> 
+                    if(!window.hcb_user){
+                        hcb_user={};
+                    } (function(){
+                        var s=document.createElement("script"), l=hcb_user.PAGE || (""+window.location).replace(/'/g,"%27"), h="https://www.htmlcommentbox.com";
+                        s.setAttribute("type","text/javascript");
+                        s.setAttribute("src", h+"/jivelib.js?page="+encodeURIComponent(l).replace(/'/g,"%27")+"&opts=16790&num=10&ts=1711200000000");
+                        document.getElementsByTagName("head")[0].appendChild(s);
+                    })();
+                </script>
+                <!-- จบโค้ด HTML Comment Box -->
+            </div>
+
+            <hr>
+            <button class="btn" style="margin-bottom: 15px;" onclick="showPage('page-intro')">𓊆 Back to Home 𓊇</button>
         </div>
     </div>
 
@@ -227,6 +267,4 @@
 
 </body>
 </html>
-
-
 
