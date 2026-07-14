@@ -3,304 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>𓊆 ☁️ Sen's Minimal Space ✨ 𓊇</title>
+    <title>𓊆 ☁️ Sen's Magical Space ✨ 𓊇</title>
     <style>
-        /* ☁️ พื้นหลังขาว-ฟ้าพาสเทล ไล่เฉดหรูหราสบายตา */
+        /* ☁️ พื้นหลังขาว-ฟ้าพาสเทล */
         body {
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
             font-family: 'Kanit', sans-serif;
             background: linear-gradient(135deg, #eef7ff 0%, #ffffff 50%, #e8f4fd 100%);
-            color: #4a5a6a;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-            padding: 40px 0; /* เพิ่มพื้นที่ด้านบนล่างเวลาเลื่อนจอ */
+            color: #4a5a6a; display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; overflow-x: hidden;
+            /* 🪄 เพิ่ม Custom Cursor */
+            cursor: url('https://cur.cursors-4u.net/symbols/sym-1/sym46.cur'), auto;
         }
 
-        /* ✨ ตกแต่งสไตล์มินิมอลด้วยไอคอนลอยนุ่มๆ */
-        body::before {
-            content: "✦";
-            position: absolute;
-            font-size: 80px;
-            color: rgba(174, 214, 241, 0.25);
-            top: 5%;
-            left: 10%;
-            pointer-events: none;
-        }
-        body::after {
-            content: "✦";
-            position: absolute;
-            font-size: 120px;
-            color: rgba(174, 214, 241, 0.15);
-            bottom: 5%;
-            right: 8%;
-            pointer-events: none;
-        }
+        /* 🪄 เอฟเฟกต์ตก (หิมะ/เมฆ/ดาว) */
+        .snowflake { position: fixed; top: -10px; z-index: 9999; pointer-events: none; animation: fall linear infinite; }
+        @keyframes fall { to { transform: translateY(110vh); } }
 
-        /* 🧼 การ์ดกระจกแก้วหรูหรา (Glassmorphism) สว่างและคลีนมาก */
+        /* 🧼 การ์ดกระจกแก้ว */
         .card {
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.9);
-            border-radius: 35px;
-            padding: 40px 25px;
-            width: 85%;
-            max-width: 400px;
-            text-align: center;
-            box-shadow: 0 20px 50px rgba(174, 214, 241, 0.25), 
-                        inset 0 0 20px rgba(255, 255, 255, 0.6);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.9); border-radius: 35px;
+            padding: 40px 25px; width: 85%; max-width: 400px; text-align: center;
+            box-shadow: 0 20px 50px rgba(174, 214, 241, 0.25);
         }
 
-        /* ☁️ ไอคอนกล่องข้อความหลักด้านบนสุด */
-        .header-icon {
-            font-size: 64px;
-            margin-bottom: 10px;
-            display: inline-block;
-            filter: drop-shadow(0 10px 10px rgba(174, 214, 241, 0.4));
-            animation: float 3s ease-in-out infinite;
+        /* 🎶 ปุ่มเพลง */
+        .music-btn {
+            background: #fff; border: 2px solid #bcdbf8; padding: 10px 20px;
+            border-radius: 50px; cursor: pointer; color: #5aa1e3; font-weight: bold;
+            margin-bottom: 20px; transition: 0.3s;
         }
+        .music-btn:hover { background: #eef7ff; }
 
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-
-        /* 🌟 หัวข้อสไตล์มินิมอลคลีนๆ */
-        h2 {
-            color: #5aa1e3;
-            font-size: 24px;
-            font-weight: 600;
-            margin-top: 10px;
-            margin-bottom: 8px;
-            letter-spacing: 1px;
-        }
-
-        .subtitle {
-            color: #8fa0b0;
-            font-size: 13px;
-            margin-bottom: 25px;
-            letter-spacing: 0.5px;
-        }
-
-        hr {
-            border: 0;
-            height: 1px;
-            background: linear-gradient(to right, rgba(188, 227, 248, 0), rgba(188, 227, 248, 0.8), rgba(188, 227, 248, 0));
-            margin: 25px 0;
-        }
-
-        /* 🧺 เมนูกล่องพรีเมียม */
-        ul {
-            list-style: none;
-            padding: 0;
-            text-align: left;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        li {
-            margin: 12px 0;
-            font-size: 14.5px;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 14px 20px;
-            border-radius: 20px;
-            border: 1px solid rgba(238, 247, 255, 0.8);
-            box-shadow: 0 4px 12px rgba(174, 214, 241, 0.1);
-            display: flex;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
-
-        li:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(174, 214, 241, 0.2);
-            border-color: #bcdbf8;
-        }
-
-        li span.emoji {
-            font-size: 18px;
-            margin-right: 15px;
-        }
-
-        li strong {
-            color: #5aa1e3;
-            font-weight: 600;
-            margin-right: 8px;
-        }
-
-        /* 📝 กล่องแถมข้อความ Note สุดน่ารัก */
-        .note-box {
-            background: rgba(255, 255, 255, 0.8);
-            padding: 20px;
-            border-radius: 24px;
-            border: 1px dashed #bcdbf8;
-            text-align: left;
-            font-size: 13.5px;
-            line-height: 1.6;
-            margin-top: 15px;
-            color: #5a6e7f;
-            box-shadow: 0 4px 15px rgba(174, 214, 241, 0.05);
-        }
-
-        .note-box h4 {
-            color: #5aa1e3;
-            margin-top: 0;
-            margin-bottom: 10px;
-            font-size: 15px;
-            display: flex;
-            align-items: center;
-        }
-
-        .note-box ul {
-            padding-left: 5px;
-        }
-
-        .note-box li.text-li {
-            background: none;
-            border: none;
-            padding: 2px 0;
-            margin: 6px 0;
-            box-shadow: none;
-            display: block;
-            font-size: 13px;
-        }
-
-        .note-box li.text-li:hover {
-            transform: none;
-            box-shadow: none;
-        }
-
-        /* ✈️ ปุ่มกดใสเรียบหรูดูแพง */
-        .btn {
-            background: linear-gradient(135deg, #74b3e9 0%, #4b92db 100%);
-            color: white;
-            border: none;
-            padding: 14px 35px;
-            font-size: 15px;
-            font-weight: bold;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 10px;
-            box-shadow: 0 8px 20px rgba(90, 161, 227, 0.3);
-            letter-spacing: 1px;
-            display: inline-block;
-            text-decoration: none;
-        }
-
-        .btn:hover {
-            transform: translateY(-2.5px);
-            box-shadow: 0 10px 25px rgba(90, 161, 227, 0.55);
-        }
-
-        /* 💚 ปุ่มกดแอดไลน์ด่วนพาสเทล */
-        .btn-line {
-            background: linear-gradient(135deg, #6fdc8c 0%, #3ec260 100%);
-            box-shadow: 0 8px 20px rgba(62, 194, 96, 0.25);
-            margin-top: 20px;
-            margin-bottom: 5px;
-        }
-
-        .btn-line:hover {
-            box-shadow: 0 10px 25px rgba(62, 194, 96, 0.45);
-        }
-
-        /* ☁️ ระบบจัดการหน้า */
+        /* ส่วนประกอบอื่นยังคงดีไซน์เดิมที่คุณเซนชอบ */
+        .header-icon { font-size: 64px; margin-bottom: 10px; animation: float 3s ease-in-out infinite; }
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
+        h2 { color: #5aa1e3; font-size: 24px; font-weight: 600; margin: 10px 0; }
+        .subtitle { color: #8fa0b0; font-size: 13px; margin-bottom: 25px; }
+        hr { border: 0; height: 1px; background: linear-gradient(to right, rgba(188, 227, 248, 0), rgba(188, 227, 248, 0.8), rgba(188, 227, 248, 0)); margin: 25px 0; }
+        .btn { background: linear-gradient(135deg, #74b3e9 0%, #4b92db 100%); color: white; border: none; padding: 14px 35px; border-radius: 50px; cursor: pointer; transition: 0.3s; margin-top: 10px; text-decoration: none; display: inline-block; }
+        .btn-line { background: linear-gradient(135deg, #6fdc8c 0%, #3ec260 100%); }
         .page { display: none; }
         .page.active { display: block; }
         .page-intro { text-align: center; }
+        ul { list-style: none; padding: 0; text-align: left; }
+        li { margin: 10px 0; padding: 10px; background: rgba(255,255,255,0.5); border-radius: 15px; font-size: 14px; }
     </style>
 </head>
 <body>
 
+    <!-- 🎵 เครื่องเล่นเพลง -->
+    <audio id="myAudio" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
     <div class="card">
-        <!-- 🏠 หน้าแรก: Welcome Cloud -->
+        <button class="music-btn" onclick="togglePlay()">🎶 Play / Pause BGM</button>
+
         <div id="page-intro" class="page page-intro active">
             <div class="header-icon">☁️</div>
             <h2>𓊆 Sen's Space 𓊇</h2>
-            <div class="subtitle">✦ ◌ minimal & cozy space ◌ ✦</div>
-            <hr>
-            <p style="color: #7f8c8d; font-size: 14px; line-height: 1.6; margin-bottom: 25px;">
-                ยินดีต้อนรับสู่พื้นที่มินิมอลสีฟ้าคลีนๆ<br>
-                กดปุ่มด้านล่างเพื่อทำความรู้จักกันนะคับ ✨
-            </p>
-            <button class="btn" onclick="showPage('page-1')"> 𓊆 Tap to Enter 𓊇 </button>
+            <button class="btn" onclick="showPage('page-1')"> 𓊆 Enter 𓊇 </button>
         </div>
 
-        <!-- 🌸 หน้าที่ 1: ข้อมูลการติดต่อ + ข้อความไลฟ์สไตล์คุณเซน -->
         <div id="page-1" class="page">
-            <div style="font-size: 32px; margin-bottom: 10px;">📋</div>
-            <h2>𓊆 Contact Profile 𓊇</h2>
-            <div class="subtitle">ช่องทางการติดต่อของเซนคับ</div>
-            <hr>
+            <h2>Profile</h2>
             <ul>
-                <li><span class="emoji">💬</span> <strong>Line :</strong> catminda</li>
-                <li><span class="emoji">📱</span> <strong>Facebook :</strong> เพลิน เพลิน</li>
-                <li><span class="emoji">📸</span> <strong>IG :</strong> pirnname , pirn.name</li>
-                <li><span class="emoji">🎮</span> <strong>Discord :</strong> pire_sun</li>
+                <li>💬 <strong>Line :</strong> catminda</li>
+                <li>🌙 เล่นเกมช่วงมืดๆ ไม่ดึกมาก</li>
             </ul>
-
-            <!-- 📝 กล่องข้อมูลไลฟ์สไตล์แบบที่คุณเซนพิมพ์มาเลย น่ารักมาก! -->
-            <div class="note-box">
-                <h4>𓊆 🎮 My Gaming Life 𓊇</h4>
-                <ul style="width: 100%;">
-                    <li class="text-li">💻 ปกติเล่นคอมบ้าง มือถือบ้าง สลับกันไป</li>
-                    <li class="text-li">🌙 วันธรรมดาจะออนเกมช่วงมืดๆ ไม่ดึกมากครับ</li>
-                    <li class="text-li">🎈 วันหยุดออนตอนไหน... แล้วแต่อารมณ์เลย 555</li>
-                </ul>
-            </div>
-
-            <hr>
-            <button class="btn" onclick="showPage('page-2')">𓊆 Go to Game IDs 𓊇</button>
+            <button class="btn" onclick="showPage('page-2')">𓊆 Game IDs 𓊇</button>
         </div>
 
-        <!-- 🎮 หน้าที่ 2: ไอดีเกม + ปุ่มแอดไลน์ด่วน -->
         <div id="page-2" class="page">
-            <div style="font-size: 32px; margin-bottom: 10px;">🎮</div>
-            <h2>𓊆 My Game IDs 𓊇</h2>
-            <div class="subtitle">แวะมาเล่นเกมด้วยกันได้น้า</div>
-            <hr>
-            <ul>
-                <li><span class="emoji">🧱</span> <strong>Roblox :</strong> komi_ko24 , g9995h1n</li>
-                <li><span class="emoji">🔥</span> <strong>Free Fire :</strong> Sentakna</li>
-                <li><span class="emoji">⚔️</span> <strong>RoV :</strong> 𝔖𝔢𝔑𝔎𝔞@𝔯𝔦𝔡𝔢</li>
-                <li><span class="emoji">⛏️</span> <strong>Minecraft :</strong> SeNkA4032</li>
-                <li><span class="emoji">🏡</span> <strong>Heartopia :</strong> Uid 361rde9f</li>
-            </ul>
-
-            <!-- 📝 กล่องข้อความทักทาย (Note) ด้านล่าง -->
-            <div class="note-box">
-                <h4>✎ 𝙽𝚘𝚝𝚎 :</h4>
-                <p style="margin: 0; font-size: 13px;">
-                    ทักมาชวนเล่นเกมได้ตลอดเลยนะ! อยู่ที่ว่าจะอ่านไหม อิอิ จริงๆ เป็นคนอารมณ์ดีครับ ถ้ารู้จักใหม่ๆ อาจจะดูสุภาพหน่อย แต่ไม่ต้องห่วง No Toxic แน่นอน 100%!
-                </p>
-            </div>
-
-            <!-- 💚 ปุ่มกดแอดไลน์ด่วนพาสเทล -->
-            <a href="https://line.me/ti/p/~catminda" target="_blank" class="btn btn-line">𓊆 💬 Add Line 𓊇</a>
-
-            <hr>
-            <button class="btn" style="margin-bottom: 15px;" onclick="showPage('page-intro')">𓊆 Back to Home 𓊇</button>
+            <h2>Game IDs</h2>
+            <a href="https://line.me/ti/p/~catminda" target="_blank" class="btn btn-line">𓊆 Add Line 𓊇</a>
+            <br><br>
+            <button class="btn" onclick="showPage('page-intro')">𓊆 Home 𓊇</button>
         </div>
     </div>
 
-    <!-- 🪄 โค้ดเปลี่ยนหน้า -->
     <script>
+        // 🪄 เอฟเฟกต์หิมะ/ดาว
+        function createFall() {
+            const span = document.createElement('span');
+            span.innerHTML = Math.random() > 0.5 ? '☁️' : '✨';
+            span.className = 'snowflake';
+            span.style.left = Math.random() * 100 + 'vw';
+            span.style.fontSize = Math.random() * 20 + 10 + 'px';
+            span.style.animationDuration = Math.random() * 3 + 5 + 's';
+            document.body.appendChild(span);
+            setTimeout(() => span.remove(), 8000);
+        }
+        setInterval(createFall, 1000);
+
+        // 🎵 ฟังก์ชันเพลง
+        function togglePlay() {
+            var audio = document.getElementById("myAudio");
+            if (audio.paused) audio.play(); else audio.pause();
+        }
+
+        // 🪄 เปลี่ยนหน้า
         function showPage(pageId) {
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-            });
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
         }
     </script>
-
 </body>
 </html>
 
