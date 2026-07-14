@@ -1,21 +1,162 @@
-            background: linear-gradient(135deg, #85c1e9 0%, #5da9e9 100%);
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>𓊆 ☁️ Sen's Minimal Space ✨ 𓊇</title>
+    <style>
+        /* ☁️ พื้นหลังขาว-ฟ้าพาสเทล ไล่เฉดหรูหราสบายตา */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Kanit', sans-serif;
+            background: linear-gradient(135deg, #eef7ff 0%, #ffffff 50%, #e8f4fd 100%);
+            color: #4a5a6a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* ✨ ตกแต่งสไตล์มินิมอลด้วยไอคอนลอยนุ่มๆ */
+        body::before {
+            content: "✦";
+            position: absolute;
+            font-size: 80px;
+            color: rgba(174, 214, 241, 0.25);
+            top: 10%;
+            left: 10%;
+            pointer-events: none;
+        }
+        body::after {
+            content: "✦";
+            position: absolute;
+            font-size: 120px;
+            color: rgba(174, 214, 241, 0.15);
+            bottom: 5%;
+            right: 8%;
+            pointer-events: none;
+        }
+
+        /* 🧼 การ์ดกระจกแก้วหรูหรา (Glassmorphism) สว่างและคลีนมาก */
+        .card {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            border-radius: 35px;
+            padding: 45px 30px;
+            width: 85%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(174, 214, 241, 0.25), 
+                        inset 0 0 20px rgba(255, 255, 255, 0.6);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* ☁️ ไอคอนกล่องข้อความหลักด้านบนสุด (ลอยได้ ดุ๊กดิ๊ก) */
+        .header-icon {
+            font-size: 64px;
+            margin-bottom: 10px;
+            display: inline-block;
+            filter: drop-shadow(0 10px 10px rgba(174, 214, 241, 0.4));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* 🌟 หัวข้อสไตล์มินิมอลคลีนๆ */
+        h2 {
+            color: #5aa1e3;
+            font-size: 24px;
+            font-weight: 600;
+            margin-top: 10px;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+            border: none;
+            background: none;
+            padding: 0;
+        }
+
+        .subtitle {
+            color: #8fa0b0;
+            font-size: 13px;
+            margin-bottom: 25px;
+            letter-spacing: 0.5px;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, rgba(188, 227, 248, 0), rgba(188, 227, 248, 0.8), rgba(188, 227, 248, 0));
+            margin: 25px 0;
+        }
+
+        /* 🧺 เมนูกล่องพรีเมียม ขอบเรืองแสงบางๆ */
+        ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        li {
+            margin: 12px 0;
+            font-size: 14.5px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 14px 20px;
+            border-radius: 20px;
+            border: 1px solid rgba(238, 247, 255, 0.8);
+            box-shadow: 0 4px 12px rgba(174, 214, 241, 0.1);
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        li:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(174, 214, 241, 0.2);
+            border-color: #bcdbf8;
+        }
+
+        li span.emoji {
+            font-size: 18px;
+            margin-right: 15px;
+        }
+
+        li strong {
+            color: #5aa1e3;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+
+        /* ✈️ ปุ่มกดใสเรียบหรูดูแพง */
+        .btn {
+            background: linear-gradient(135deg, #74b3e9 0%, #4b92db 100%);
             color: white;
             border: none;
-            padding: 14px 30px;
-            font-size: 16px;
+            padding: 14px 35px;
+            font-size: 15px;
             font-weight: bold;
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-top: 15px;
-            box-shadow: 0 6px 15px rgba(93, 169, 233, 0.3);
+            margin-top: 10px;
+            box-shadow: 0 8px 20px rgba(90, 161, 227, 0.3);
+            letter-spacing: 1px;
             display: inline-block;
-            text-decoration: none;
         }
 
         .btn:hover {
-            transform: scale(1.05) translateY(-2px);
-            box-shadow: 0 8px 20px rgba(93, 169, 233, 0.5);
+            transform: translateY(-2.5px);
+            box-shadow: 0 10px 25px rgba(90, 161, 227, 0.55);
         }
 
         /* ☁️ ระบบจัดการหน้า */
@@ -27,44 +168,50 @@
 <body>
 
     <div class="card">
-        <!-- 🏠 หน้าแรก: Welcome to Cinnamon Space -->
+        <!-- 🏠 หน้าแรก: Welcome Cloud -->
         <div id="page-intro" class="page page-intro active">
-            <h2>𓍯 ☁️ Sen's Space 🐶 𓊆 🌟 𓊇</h2>
-            <div class="gif-container">
-                <!-- รูปน้องชินนามอนโรลบินบนท้องฟ้าสดใส ลิงก์ปลอดภัย 100% -->
-                <img src="https://i.postimg.cc/9FmDMMtY/cinnamo-space.gif" alt="Cinnamoroll Cute">
-            </div>
-            <p style="color: #7f8c8d; font-size: 14px;">บินขึ้นไปบนท้องฟ้ากับชินนามอนโรลกันค้าบ ☁️ * ◌</p>
-            <button class="btn" onclick="showPage('page-1')"> 𓊆 ✈️ Tap to Fly 𓊇 </button>
+            <div class="header-icon">☁️</div>
+            <h2>𓊆 Sen's Space 𓊇</h2>
+            <div class="subtitle">✦ ◌ minimal & cozy space ◌ ✦</div>
+            <hr>
+            <p style="color: #7f8c8d; font-size: 14px; line-height: 1.6; margin-bottom: 25px;">
+                ยินดีต้อนรับสู่พื้นที่มินิมอลสีฟ้าคลีนๆ<br>
+                กดปุ่มด้านล่างเพื่อทำความรู้จักกันนะคับ ✨
+            </p>
+            <button class="btn" onclick="showPage('page-1')"> 𓊆 Tap to Enter 𓊇 </button>
         </div>
 
         <!-- 🌸 หน้าที่ 1: ข้อมูลการติดต่อ -->
         <div id="page-1" class="page">
-            <h2>໒꒰ྀི 📝 Profile & Contact ꒱ྀི১</h2>
+            <div style="font-size: 32px; margin-bottom: 10px;">📋</div>
+            <h2>𓊆 Contact Profile 𓊇</h2>
+            <div class="subtitle">ช่องทางการติดต่อของเซนคับ</div>
             <hr>
             <ul>
-                <li><span>💬</span> <strong>Line :</strong> catminda</li>
-                <li><span>📱</span> <strong>Facebook :</strong> เพลิน เพลิน</li>
-                <li><span>📸</span> <strong>IG :</strong> pirnname , pirn.name</li>
-                <li><span>🎮</span> <strong>Discord :</strong> pire_sun</li>
+                <li><span class="emoji">💬</span> <strong>Line :</strong> catminda</li>
+                <li><span class="emoji">📱</span> <strong>Facebook :</strong> เพลิน เพลิน</li>
+                <li><span class="emoji">📸</span> <strong>IG :</strong> pirnname , pirn.name</li>
+                <li><span class="emoji">🎮</span> <strong>Discord :</strong> pire_sun</li>
             </ul>
             <hr>
-            <button class="btn" onclick="showPage('page-2')">𓊆 🎮 My Game IDs 𓊇</button>
+            <button class="btn" onclick="showPage('page-2')">𓊆 Go to Game IDs 𓊇</button>
         </div>
 
         <!-- 🎮 หน้าที่ 2: ไอดีเกม -->
         <div id="page-2" class="page">
-            <h2>໒꒰ྀི 🎮 My Games ꒱ྀི১</h2>
+            <div style="font-size: 32px; margin-bottom: 10px;">🎮</div>
+            <h2>𓊆 My Game IDs 𓊇</h2>
+            <div class="subtitle">แวะมาเล่นเกมด้วยกันได้น้า</div>
             <hr>
             <ul>
-                <li><span>🧱</span> <strong>Roblox :</strong> komi_ko24 , g9995h1n</li>
-                <li><span>🔥</span> <strong>Free Fire :</strong> Senrakna</li>
-                <li><span>⚔️</span> <strong>RoV :</strong> 𝔖𝔢𝔑𝔎𝔞@𝔯𝔦𝔡𝔢</li>
-                <li><span>⛏️</span> <strong>Minecraft :</strong> SeNkA4032</li>
-                <li><span>🏡</span> <strong>Heartopia :</strong> Uid 361rde9f</li>
+                <li><span class="emoji">🧱</span> <strong>Roblox :</strong> komi_ko24 , g9995h1n</li>
+                <li><span class="emoji">🔥</span> <strong>Free Fire :</strong> Sentakna</li>
+                <li><span class="emoji">⚔️</span> <strong>RoV :</strong> 𝔖𝔢𝔑𝔎𝔞@𝔯𝔦𝔡𝔢</li>
+                <li><span class="emoji">⛏️</span> <strong>Minecraft :</strong> SeNkA4032</li>
+                <li><span class="emoji">🏡</span> <strong>Heartopia :</strong> Uid 361rde9f</li>
             </ul>
             <hr>
-            <button class="btn" onclick="showPage('page-intro')">𓊆 🏠 กลับหน้าแรก 𓊇</button>
+            <button class="btn" onclick="showPage('page-intro')">𓊆 Back to Home 𓊇</button>
         </div>
     </div>
 
@@ -80,3 +227,6 @@
 
 </body>
 </html>
+
+
+
