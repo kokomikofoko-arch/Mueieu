@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sen's Space</title>
+    <style>
+        /* 🌌 สไตล์พื้นหลังดาวระยิบระยับ โทนน้ำเงินเข้ม */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #0b132b;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+                radial-gradient(#64dfdf, rgba(100,223,223,.15) 1px, transparent 30px),
+                radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px);
+            background-size: 550px 550px, 350px 350px, 250px 250px;
+            background-position: 0 0, 40px 60px, 130px 270px;
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        /* 📦 กล่องข้อความสไตล์การ์ดโปร่งแสง */
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            width: 85%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        /* 🖼️ ปรับขนาดรูป GIF ตรงกลาง */
+        .gif-container img {
+            width: 100%;
+            border-radius: 10px;
+            border: 2px solid #64dfdf;
+            margin-bottom: 20px;
+        }
+
+        /* 🔘 สไตล์ปุ่มกดเปลี่ยนหน้า */
+        .btn {
+            background-color: #64dfdf;
+            color: #0b132b;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 15px;
+            display: inline-block;
+            text-decoration: none;
+        }
+        .btn:hover {
+            background-color: #4ea8de;
+            transform: scale(1.05);
+        }
+
+        /* 📑 ระบบซ่อน/แสดงหน้า */
+        .page { display: none; text-align: left; }
+        .page.active { display: block; }
+        .page-intro { text-align: center; }
+
+        h2 { color: #64dfdf; text-align: center; margin-top: 0; }
+        ul { list-style: none; padding: 0; }
+        li { margin: 12px 0; font-size: 15px; }
+        hr { border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin: 15px 0; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <!-- 🌌 หน้าเปิด (Intro Page) -->
+        <div id="page-intro" class="page page-intro active">
+            <div class="gif-container">
+                <!-- เจมีนายใส่รูป GIF ดวงดาวระยับที่เลือกไว้ให้แล้วน้า -->
+                <img src="https://i.postimg.cc/D04Y424H/3195.gif" alt="Starry Sky">
+            </div>
+            <button class="btn" onclick="showPage('page-1')">⭐ [ 𝚃𝚊𝚙 𝚝𝚘 𝙴𝚗𝚝𝚎𝚛 ] ⭐</button>
+        </div>
+
+        <!-- 📱 หน้าที่ 1: Profile & Contact -->
+        <div id="page-1" class="page">
+            <h2>✦ 𝚂𝚎𝚗 (เซน) ✦</h2>
+            <hr>
+            <p><strong>💬 𝙲𝚘𝚗𝚝𝚊𝚌𝚝 𝙼𝚎 :</strong></p>
+            <ul>
+                <li>🔹 <strong>Line :</strong> catminda</li>
+                <li>🔹 <strong>Facebook :</strong> เพลิน เพลิน</li>
+                <li>🔹 <strong>IG :</strong> pirnname , pirn.name</li>
+                <li>🔹 <strong>Discord :</strong> pire_sun</li>
+            </ul>
+            <hr>
+            <div style="text-align: center;">
+                <button class="btn" onclick="showPage('page-2')">🌟 หน้าถัดไป</button>
+            </div>
+        </div>
+
+        <!-- 🎮 หน้าที่ 2: My Game IDs -->
+        <div id="page-2" class="page">
+            <h2>🎮 𝙼𝚢 𝙶𝚊𝚖𝚎𝚜 🎮</h2>
+            <hr>
+            <ul>
+                <li>🧊 <strong>Roblox :</strong> komi_ko24 , g9999hin</li>
+                <li>🧊 <strong>Free Fire :</strong> Sentakna</li>
+                <li>🧊 <strong>RoV :</strong> ꒰ఎku͜͡ri໒꒱</li>
+                <li>🧊 <strong>Minecraft :</strong> SeNkA4032</li>
+                <li>🧊 <strong>Heartopia :</strong> Uid 361rde9f</li>
+            </ul>
+            <hr>
+            <div style="text-align: center;">
+                <button class="btn" onclick="showPage('page-3')">🌟 หน้าถัดไป</button>
+            </div>
+        </div>
+
+        <!-- ☕ หน้าที่ 3: Lifestyle & Status -->
+        <div id="page-3" class="page">
+            <h2>🌍 𝙼𝚢 𝚂𝚙𝚊𝚌𝚎 🌍</h2>
+            <hr>
+            <ul>
+                <li>💻 ปกติเล่นคอมบ้างมือถือบ้างครับ</li>
+                <li>🌙 วันปกติออนช่วงมืดๆ ไม่ดึกมากน้า</li>
+                <li>💤 วันหยุด... ออนตามอารมณ์เลย 555</li>
+            </ul>
+            <p><strong> 𝙽𝚘𝚝𝚎 📝 :</strong> ทักมาชวนเล่นเกมได้ตลอดนะ อยู่ที่ว่าผมจะอ่านไหม อิอิ เป็นคนอารมณ์ดีครับ ถ้ารู้จักใหม่ๆ ก็จะสุภาพหน่อย แต่ไม่ Toxic แน่นอน! ✨</p>
+            <hr>
+            <div style="text-align: center;">
+                <button class="btn" onclick="showPage('page-intro')">☄️ กลับหน้าแรก</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ฟังก์ชันสำหรับกดคลิกสลับหน้าไปมา
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+        }
+    </script>
+</body>
+</html>
