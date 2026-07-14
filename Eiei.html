@@ -135,6 +135,48 @@
             margin-right: 8px;
         }
 
+        /* 📝 กล่องแถมข้อความ Note สุดน่ารัก */
+        .note-box {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 24px;
+            border: 1px dashed #bcdbf8;
+            text-align: left;
+            font-size: 13.5px;
+            line-height: 1.6;
+            margin-top: 15px;
+            color: #5a6e7f;
+            box-shadow: 0 4px 15px rgba(174, 214, 241, 0.05);
+        }
+
+        .note-box h4 {
+            color: #5aa1e3;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .note-box ul {
+            padding-left: 5px;
+        }
+
+        .note-box li.text-li {
+            background: none;
+            border: none;
+            padding: 2px 0;
+            margin: 6px 0;
+            box-shadow: none;
+            display: block;
+            font-size: 13px;
+        }
+
+        .note-box li.text-li:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
         /* ✈️ ปุ่มกดใสเรียบหรูดูแพง */
         .btn {
             background: linear-gradient(135deg, #74b3e9 0%, #4b92db 100%);
@@ -150,6 +192,7 @@
             box-shadow: 0 8px 20px rgba(90, 161, 227, 0.3);
             letter-spacing: 1px;
             display: inline-block;
+            text-decoration: none;
         }
 
         .btn:hover {
@@ -157,26 +200,17 @@
             box-shadow: 0 10px 25px rgba(90, 161, 227, 0.55);
         }
 
-        /* 💬 ปรับแต่งหน้าตากล่องคอมเมนต์ HTML Comment Box ให้น่ารักเข้ากับธีม */
-        .comment-section {
-            margin-top: 25px;
-            background: rgba(255, 255, 255, 0.8);
-            padding: 15px;
-            border-radius: 24px;
-            border: 1px solid #d4ebf7;
-            text-align: left;
+        /* 💚 ปุ่มกดแอดไลน์ด่วนพาสเทล */
+        .btn-line {
+            background: linear-gradient(135deg, #6fdc8c 0%, #3ec260 100%);
+            box-shadow: 0 8px 20px rgba(62, 194, 96, 0.25);
+            margin-top: 20px;
+            margin-bottom: 5px;
         }
-        .comment-section h3 {
-            font-size: 16px;
-            color: #5aa1e3;
-            margin-top: 0;
-            margin-bottom: 12px;
-            text-align: center;
+
+        .btn-line:hover {
+            box-shadow: 0 10px 25px rgba(62, 194, 96, 0.45);
         }
-        /* ซ่อนหน้าตาเดิมๆ บางจุดเพื่อความสวยคลีน */
-        #HCB_comment_box { font-family: 'Kanit', sans-serif !important; }
-        #HCB_comment_box a { color: #5aa1e3 !important; }
-        #HCB_comment_box .hcb-shadow { border-radius: 15px !important; }
 
         /* ☁️ ระบบจัดการหน้า */
         .page { display: none; }
@@ -200,7 +234,7 @@
             <button class="btn" onclick="showPage('page-1')"> 𓊆 Tap to Enter 𓊇 </button>
         </div>
 
-        <!-- 🌸 หน้าที่ 1: ข้อมูลการติดต่อ -->
+        <!-- 🌸 หน้าที่ 1: ข้อมูลการติดต่อ + ข้อความไลฟ์สไตล์คุณเซน -->
         <div id="page-1" class="page">
             <div style="font-size: 32px; margin-bottom: 10px;">📋</div>
             <h2>𓊆 Contact Profile 𓊇</h2>
@@ -212,11 +246,22 @@
                 <li><span class="emoji">📸</span> <strong>IG :</strong> pirnname , pirn.name</li>
                 <li><span class="emoji">🎮</span> <strong>Discord :</strong> pire_sun</li>
             </ul>
+
+            <!-- 📝 กล่องข้อมูลไลฟ์สไตล์แบบที่คุณเซนพิมพ์มาเลย น่ารักมาก! -->
+            <div class="note-box">
+                <h4>𓊆 🎮 My Gaming Life 𓊇</h4>
+                <ul style="width: 100%;">
+                    <li class="text-li">💻 ปกติเล่นคอมบ้าง มือถือบ้าง สลับกันไป</li>
+                    <li class="text-li">🌙 วันธรรมดาจะออนเกมช่วงมืดๆ ไม่ดึกมากครับ</li>
+                    <li class="text-li">🎈 วันหยุดออนตอนไหน... แล้วแต่อารมณ์เลย 555</li>
+                </ul>
+            </div>
+
             <hr>
             <button class="btn" onclick="showPage('page-2')">𓊆 Go to Game IDs 𓊇</button>
         </div>
 
-        <!-- 🎮 หน้าที่ 2: ไอดีเกม + สมุดเยี่ยมชม -->
+        <!-- 🎮 หน้าที่ 2: ไอดีเกม + ปุ่มแอดไลน์ด่วน -->
         <div id="page-2" class="page">
             <div style="font-size: 32px; margin-bottom: 10px;">🎮</div>
             <h2>𓊆 My Game IDs 𓊇</h2>
@@ -224,31 +269,22 @@
             <hr>
             <ul>
                 <li><span class="emoji">🧱</span> <strong>Roblox :</strong> komi_ko24 , g9995h1n</li>
-                <li><span class="emoji">🔥</span> <strong>Free Fire :</strong> Senrakna</li>
+                <li><span class="emoji">🔥</span> <strong>Free Fire :</strong> Sentakna</li>
                 <li><span class="emoji">⚔️</span> <strong>RoV :</strong> 𝔖𝔢𝔑𝔎𝔞@𝔯𝔦𝔡𝔢</li>
                 <li><span class="emoji">⛏️</span> <strong>Minecraft :</strong> SeNkA4032</li>
                 <li><span class="emoji">🏡</span> <strong>Heartopia :</strong> Uid 361rde9f</li>
             </ul>
-            <hr>
 
-            <!-- 💬 กล่องสมุดเยี่ยมชม (Guestbook) ของจริงพิมพ์คุยกันได้เลย! -->
-            <div class="comment-section">
-                <h3>໒꒰ྀི 💬 Guestbook ꒱ྀི১</h3>
-                <!-- เริ่มโค้ด HTML Comment Box -->
-                <div id="HCB_comment_box"><a href="http://www.htmlcommentbox.com">HTML Comment Box</a> is loading comments...</div>
-                <link rel="stylesheet" type="text/css" href="https://www.htmlcommentbox.com/static/style/skin/simple/skin.css" />
-                <script type="text/javascript" id="hcb"> 
-                    if(!window.hcb_user){
-                        hcb_user={};
-                    } (function(){
-                        var s=document.createElement("script"), l=hcb_user.PAGE || (""+window.location).replace(/'/g,"%27"), h="https://www.htmlcommentbox.com";
-                        s.setAttribute("type","text/javascript");
-                        s.setAttribute("src", h+"/jivelib.js?page="+encodeURIComponent(l).replace(/'/g,"%27")+"&opts=16790&num=10&ts=1711200000000");
-                        document.getElementsByTagName("head")[0].appendChild(s);
-                    })();
-                </script>
-                <!-- จบโค้ด HTML Comment Box -->
+            <!-- 📝 กล่องข้อความทักทาย (Note) ด้านล่าง -->
+            <div class="note-box">
+                <h4>✎ 𝙽𝚘𝚝𝚎 :</h4>
+                <p style="margin: 0; font-size: 13px;">
+                    ทักมาชวนเล่นเกมได้ตลอดเลยนะ! อยู่ที่ว่าจะอ่านไหม อิอิ จริงๆ เป็นคนอารมณ์ดีครับ ถ้ารู้จักใหม่ๆ อาจจะดูสุภาพหน่อย แต่ไม่ต้องห่วง No Toxic แน่นอน 100%!
+                </p>
             </div>
+
+            <!-- 💚 ปุ่มกดแอดไลน์ด่วนพาสเทล -->
+            <a href="https://line.me/ti/p/~catminda" target="_blank" class="btn btn-line">𓊆 💬 Add Line 𓊇</a>
 
             <hr>
             <button class="btn" style="margin-bottom: 15px;" onclick="showPage('page-intro')">𓊆 Back to Home 𓊇</button>
