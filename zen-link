@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zen's Space ☁️</title>
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600&family=Kanit:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #eef5ff;
+            --card-bg: #ffffff;
+            --text-main: #3a5b8c;
+            --text-sub: #7091be;
+            --accent: #b9d7ea;
+            --accent-hover: #9bbec8;
+            --btn-bg: #f0f6ff;
+            --shadow: 0 12px 30px rgba(165, 195, 227, 0.25);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #1b263b;
+            --card-bg: #2b3a55;
+            --text-main: #e0eafc;
+            --text-sub: #a5b4fc;
+            --accent: #48cae4;
+            --accent-hover: #90e0ef;
+            --btn-bg: #1e293b;
+            --shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Fredoka', 'Kanit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            transition: var(--transition);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            padding: 20px 0;
+        }
+
+        /* --- 1. Welcome Screen (Cinnamoroll Style) --- */
+        #welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #dff0ea 0%, #b9d7ea 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: transform 0.6s ease-in-out;
+        }
+
+        #welcome-screen.hide {
+            transform: translateY(-100%);
+        }
+
+        .welcome-avatar {
+            font-size: 5rem;
+            animation: float 3s ease-in-out infinite;
+            margin-bottom: 20px;
+        }
+
+        .welcome-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #3a5b8c;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+
+        .enter-btn {
+            padding: 14px 40px;
+            font-size: 1.1rem;
+            border: none;
+            background: #ffffff;
+            color: #3a5b8c;
+            cursor: pointer;
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: 0 8px 20px rgba(58, 91, 140, 0.15);
+            transition: var(--transition);
+        }
+
+        .enter-btn:hover {
+            transform: scale(1.08);
+            background: #3a5b8c;
+            color: #ffffff;
+        }
+
+        /* --- 2. Main Bio Card --- */
+        .bio-container {
+            width: 100%;
+            max-width: 450px;
+            padding: 20px;
+            z-index: 10;
+        }
+
+        .bio-card {
+            background-color: var(--card-bg);
+            border-radius: 30px;
+            padding: 40px 25px 30px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            position: relative;
+            border: 3px solid rgba(255, 255, 255, 0.7);
+            transition: var(--transition);
+        }
+
+        [data-theme="dark"] .bio-card {
+            border: 3px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Dark Mode Toggle */
+        .theme-toggle {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.2) rotate(15deg);
+        }
+
+        /* Profile Section */
+        .profile-area {
+            margin-bottom: 25px;
+        }
+
+        .cinnamon-ears {
+            display: flex;
+            justify-content: center;
+            gap: 90px;
+            margin-bottom: -25px;
+        }
+
+        .ear {
+            width: 35px;
+            height: 25px;
+            background: var(--accent);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .profile-img {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            border: 4px solid var(--accent);
+            background: #ffffff;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3.5rem;
+            cursor: pointer;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.05);
+            transition: var(--transition);
+        }
+
+        .profile-img:active {
+            transform: scale(0.9);
+        }
+
+        .name {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        /* Music Player Box */
+        .music-box {
+            background: var(--btn-bg);
+            border-radius: 20px;
+            padding: 12px 20px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px dashed var(--text-sub);
+        }
+
+        .music-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.9rem;
+            text-align: left;
+        }
+
+        .music-info i {
+            animation: spin 4s linear infinite;
+        }
+
+        .play-btn {
+            background: var(--text-main);
+            color: var(--card-bg);
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        /* ซ่อนหน้าต่าง YouTube ตัวจริงไว้ข้างหลัง */
+        #youtube-player-container {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* --- Section Styling --- */
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-align: left;
+            margin: 20px 0 12px 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-main);
+        }
+
+        .section-title i {
+            color: var(--text-sub);
+        }
+
+        /* Grid Contacts (ส่วนที่ 1) */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .contact-item {
+            background: var(--btn-bg);
+            padding: 12px;
+            border-radius: 18px;
+            text-decoration: none;
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .contact-item i {
+            font-size: 1.4rem;
+        }
+
+        .contact-item span {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-3px);
+            background: var(--card-bg);
+            border-color: var(--text-sub);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+        }
+
+        /* List Games (ส่วนที่ 2) */
+        .game-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .game-card {
+            background: var(--btn-bg);
+            padding: 14px 20px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .game-name {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+
+        .game-id {
+            color: var(--text-sub);
+            font-size: 0.9rem;
+            background: var(--card-bg);
+            padding: 4px 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        /* About & Status (ส่วนที่ 3) */
+        .about-box {
+            background: linear-gradient(135deg, var(--btn-bg) 0%, var(--card-bg) 100%);
+            padding: 20px;
+            border-radius: 22px;
+            text-align: left;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .about-box ul {
+            list-style: none;
+            margin-bottom: 12px;
+        }
+
+        .about-box li {
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .about-box li i {
+            color: var(--text-sub);
+            font-size: 0.8rem;
+        }
+
+        .status-text {
+            border-top: 1px dashed var(--accent);
+            padding-top: 12px;
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        /* --- Easter Egg Modal --- */
+        #egg-modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(58, 91, 140, 0.4);
+            backdrop-filter: blur(5px);
+            z-index: 10000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .egg-box {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 25px;
+            max-width: 340px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border: 3px solid var(--accent);
+            animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .egg-box h3 {
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+
+        .egg-box button {
+            margin-top: 15px;
+            padding: 8px 25px;
+            border: none;
+            background: var(--text-main);
+            color: var(--card-bg);
+            border-radius: 50px;
+            cursor: pointer;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.7); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. หน้า Welcome -->
+    <div id="welcome-screen">
+        <div class="welcome-avatar">☁️</div>
+        <h1 class="welcome-title">Welcome to Zen's Space</h1>
+        <button class="enter-btn" onclick="enterSpace()">เข้ามาเล๊ยย ✨</button>
+    </div>
+
+    <!-- 2. หน้าหลักรูปการ์ดไบโอ -->
+    <div class="bio-container">
+        <div class="bio-card">
+            
+            <button class="theme-toggle" onclick="toggleTheme()" id="theme-icon" title="สลับโหมด">
+                <i class="fa-solid fa-star"></i>
+            </button>
+
+            <div class="profile-area">
+                <div class="cinnamon-ears">
+                    <div class="ear"></div>
+                    <div class="ear"></div>
+                </div>
+                <div class="profile-img" id="cinnamon-pic" title="ลองกดฉันรัวๆ สิ!">
+                    🐶
+                </div>
+                <h2 class="name">เซน —</h2>
+            </div>
+
+            <!-- กล่องเพลง (เปลี่ยนเพลงเป็น "ให้เธอรู้" เรียบร้อย) -->
+            <div class="music-box">
+                <div class="music-info">
+                    <i class="fa-solid fa-compact-disc" id="music-disc"></i>
+                    <div>
+                        <div style="font-weight:600;">ให้เธอรู้</div>
+                        <div style="font-size:0.75rem; color: var(--text-sub);">YouTube Music</div>
+                    </div>
+                </div>
+                <button class="play-btn" onclick="toggleMusic()" id="music-btn">
+                    <i class="fa-solid fa-play"></i>
+                </button>
+            </div>
+
+            <!-- แอบซ่อน YouTube API Player ไว้ในพื้นหลัง -->
+            <div id="youtube-player-container">
+                <div id="player"></div>
+            </div>
+
+            <!-- ส่วนที่ 1: ช่องทางการติดต่อ -->
+            <div class="section-title"><i class="fa-solid fa-paper-plane"></i> Contact Me</div>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <i class="fa-brands fa-line" style="color: #06c755;"></i>
+                    Line
+                    <span>catminda</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fa-brands fa-facebook" style="color: #1877f2;"></i>
+                    Facebook
+                    <span>เพลิน เพลิน</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fa-brands fa-instagram" style="color: #e1306c;"></i>
+                    Instagram
+                    <span style="font-size: 0.8rem;">pirnname<br>pirn.name</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fa-brands fa-discord" style="color: #5865f2;"></i>
+                    Discord
+                    <span>pire_sun</span>
+                </div>
+            </div>
+
+            <!-- ส่วนที่ 2: ข้อมูลเกม -->
+            <div class="section-title"><i class="fa-solid fa-gamepad"></i> My Games</div>
+            <div class="game-list">
+                <div class="game-card">
+                    <div class="game-name">🎮 Roblox</div>
+                    <div class="game-id">komi_ko24, g9999hin</div>
+                </div>
+                <div class="game-card">
+                    <div class="game-name">🔥 Free Fire</div>
+                    <div class="game-id">Sentakna</div>
+                </div>
+                <div class="game-card">
+                    <div class="game-name">⚔️ RoV</div>
+                    <div class="game-id">꒰ఎku͜͡ri໒꒱</div>
+                </div>
+                <div class="game-card">
+                    <div class="game-name">🧱 Minecraft</div>
+                    <div class="game-id">SeNkA4032</div>
+                </div>
+                <div class="game-card">
+                    <div class="game-name">🏡 Heartopia</div>
+                    <div class="game-id">Uid 361rde9f</div>
+                </div>
+            </div>
+
+            <!-- ส่วนที่ 3: ไลฟ์สไตล์การเล่นเกม -->
+            <div class="section-title"><i class="fa-solid fa-heart"></i> About Me / Lifestyle</div>
+            <div class="about-box">
+                <ul>
+                    <li><i class="fa-solid fa-circle"></i> ปกติเล่นคอมบ้างมือถือบ้างครับ</li>
+                    <li><i class="fa-solid fa-circle"></i> วันปกติออนเกมช่วงมืดๆ ไม่ดึกมากน้า</li>
+                    <li><i class="fa-solid fa-circle"></i> วันหยุดออนตอนไหน... แล้วแต่อารมณ์เลย ☁️</li>
+                </ul>
+                <div class="status-text">
+                    💬 ทักมาชวนเล่นเกมได้ตลอดเลยนะ อยู่ที่ว่าผมจะอ่านไหม อิอิ เป็นคนอารมณ์ดี แต่ถ้ารู้จักใหม่ๆ ก็จะสุภาพหน่อย แต่ไม่ต้องห่วง <b>ไม่ Toxic แน่นอนครับ! ✨</b>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- หน้าต่างป๊อปอัปความลับ (Easter Egg) -->
+    <div id="egg-modal">
+        <div class="egg-box">
+            <h2>☁️ Secret Found!</h2>
+            <p style="margin-top:10px;">คุณค้นพบก้อนเมฆลับของเซนแล้ว! ยินดีต้อนรับสู่ก๊วนชินนาม่อนนะค๊าฟ 🐶✨</p>
+            <button onclick="closeEgg()">ปิดความลับ</button>
+        </div>
+    </div>
+
+    <script>
+        // โหลดระบบควบคุม YouTube API
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+        var isPlaying = false;
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '100',
+                width: '100',
+                videoId: 'rfIKmv46DRg', // ไอดีของเพลง "ให้เธอรู้"
+                playerVars: {
+                    'autoplay': 0,
+                    'controls': 0,
+                    'loop': 1,
+                    'playlist': 'rfIKmv46DRg'
+                },
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            // โหลดระบบเรียบร้อย
+        }
+
+        function enterSpace() {
+            document.getElementById('welcome-screen').classList.add('hide');
+            setTimeout(() => {
+                if(player && typeof player.playVideo === 'function') {
+                    player.playVideo();
+                    isPlaying = true;
+                    document.getElementById('music-btn').innerHTML = '<i class="fa-solid fa-pause"></i>';
+                    document.getElementById('music-disc').style.animationPlayState = 'running';
+                }
+            }, 500);
+        }
+
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme');
+            const icon = document.getElementById('theme-icon');
+            if (current === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'light');
+                icon.innerHTML = '<i class="fa-solid fa-star"></i>';
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                icon.innerHTML = '<i class="fa-solid fa-moon"></i>';
+            }
+        }
+
+        function toggleMusic() {
+            const btn = document.getElementById('music-btn');
+            const disc = document.getElementById('music-disc');
+            
+            if (!isPlaying) {
+                player.playVideo();
+                isPlaying = true;
+                btn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+                disc.style.animationPlayState = 'running';
+            } else {
+                player.pauseVideo();
+                isPlaying = false;
+                btn.innerHTML = '<i class="fa-solid fa-play"></i>';
+                disc.style.animationPlayState = 'paused';
+            }
+        }
+
+        let count = 0;
+        document.getElementById('cinnamon-pic').ad dEventListener('click', () => {
+            count++;
+            if(count === 5) {
+                document.getElementById('egg-modal').style.display = 'flex';
+                count = 0;
+            }
+        });
+
+        function closeEgg() {
+            document.getElementById('egg-modal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
+
