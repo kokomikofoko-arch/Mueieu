@@ -51,61 +51,58 @@
             padding: 20px 0;
         }
 
-        /* --- 1. Welcome Screen --- */
-        #welcome-screen {
+        /* --- Hacker Terminal Screen --- */
+        #terminal-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #dff0ea 0%, #b9d7ea 100%);
+            background-color: #0b132b;
+            color: #48cae4;
+            font-family: monospace;
+            padding: 30px 20px;
+            z-index: 10000;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: transform 0.6s ease-in-out;
+            justify-content: flex-start;
+            align-items: flex-start;
+            overflow: hidden;
+            transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.6, -0.28, 0.735, 0.045);
         }
 
-        #welcome-screen.hide {
-            transform: translateY(-100%);
-            pointer-events: none; /* ป้องกันการบล็อกคลิกหลังซ่อน */
+        #terminal-screen.shatter {
+            opacity: 0;
+            transform: scale(1.5);
+            pointer-events: none;
         }
 
-        .welcome-avatar {
-            font-size: 5rem;
-            animation: float 3s ease-in-out infinite;
-            margin-bottom: 20px;
+        .terminal-code {
+            font-family: monospace;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            word-break: break-all;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        .welcome-title {
-            font-size: 2rem;
-            font-weight: 600;
-            color: #3a5b8c;
-            margin-bottom: 25px;
-            letter-spacing: 1px;
+        .cursor {
+            display: inline-block;
+            width: 8px;
+            height: 15px;
+            background: #48cae4;
+            animation: blink 0.7s infinite;
+            vertical-align: middle;
+            margin-left: 4px;
         }
 
-        .enter-btn {
-            padding: 14px 40px;
-            font-size: 1.1rem;
-            border: none;
-            background: #ffffff;
-            color: #3a5b8c;
-            cursor: pointer;
-            border-radius: 50px;
-            font-weight: 600;
-            box-shadow: 0 8px 20px rgba(58, 91, 140, 0.15);
-            transition: var(--transition);
+        @keyframes blink {
+            50% { opacity: 0; }
         }
 
-        .enter-btn:hover {
-            transform: scale(1.08);
-            background: #3a5b8c;
-            color: #ffffff;
-        }
-
-        /* --- 2. Main Bio Card --- */
+        /* --- Main Bio Card --- */
         .bio-container {
             width: 100%;
             max-width: 450px;
@@ -396,12 +393,6 @@
             cursor: pointer;
         }
 
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-
         @keyframes spin {
             100% { transform: rotate(360deg); }
         }
@@ -414,15 +405,12 @@
 </head>
 <body>
 
-    <!-- 1. หน้า Welcome -->
-    <div id="welcome-screen">
-        <div class="welcome-avatar">☁️</div>
-        <h1 class="welcome-title">Welcome to Zen's Space</h1>
-        <!-- แก้ไขฟังก์ชันตรงนี้ให้ทำงานทันทีไม่ต้องรอ YouTube -->
-        <button class="enter-btn" onclick="enterSpace()">เข้ามาเล๊ยย ✨</button>
+    <!-- หน้า Hacker Intro (พิมพ์โค้ดอัตโนมัติ) -->
+    <div id="terminal-screen">
+        <div class="terminal-code" id="terminal-text"></div>
     </div>
 
-    <!-- 2. หน้าหลักรูปการ์ดไบโอ -->
+    <!-- หน้าหลักรูปการ์ดไบโอ -->
     <div class="bio-container">
         <div class="bio-card">
             
@@ -534,7 +522,73 @@
     </div>
 
     <script>
-        // โหลดระบบควบคุม YouTube API แยกต่างหาก
+        // ระบบพิมพ์โค้ดแฮกเกอร์อัตโนมัติ
+        const lines = [
+            "root@zen_space:~# connecting to server...",
+            "status: SECURE CONNECTION ESTABLISHED.",
+            "root@zen_space:~# bypass_firewall --force",
+            "loading modules: [roblox] [rov] [minecraft] [freefire]...",
+            "root@zen_space:~# decrypting_user_profile --id:pirnname",
+            "searching data...",
+            "ACCESS GRANTED! WELCOME TO ZEN'S CLOUD SPACE ☁️"
+        ];
+
+        let lineIndex = 0;
+        let charIndex = 0;
+        const terminalText = document.getElementById("terminal-text");
+
+        function typeCode() {
+            if (lineIndex < lines.length) {
+                if (charIndex === 0) {
+                    terminalText.innerHTML += (lineIndex > 0 ? "\n" : "") + "> ";
+                }
+                
+                terminalText.innerHTML += lines[lineIndex].charAt(charIndex);
+                charIndex++;
+                
+                // ความเร็วในการพิมพ์ตัวอักษรต่อตัว (หน่วยมิลลิวินาที)
+                let speed = 25; 
+                if (charIndex < lines[lineIndex].length) {
+                    setTimeout(typeCode, speed);
+                } else {
+                    charIndex = 0;
+                    lineIndex++;
+                    // เว้นช่วงเวลาก่อนขึ้นบรรทัดใหม่
+                    setTimeout(typeCode, 400); 
+                }
+            } else {
+                // เพิ่มเคอร์เซอร์กระพริบปิดท้าย
+                terminalText.innerHTML += '<span class="cursor"></span>';
+                // พอพิมพ์เสร็จหมด รอ 1 วินาทีแล้วระเบิดเข้าหน้าหลัก
+                setTimeout(breakTerminal, 1000);
+            }
+        }
+
+        function breakTerminal() {
+            const screen = document.getElementById("terminal-screen");
+            screen.classList.add("shatter");
+            
+            // เปิดเพลงอัตโนมัติหลังจากเข้าหน้าหลัก
+            setTimeout(function() {
+                if (player && typeof player.playVideo === 'function') {
+                    try {
+                        player.playVideo();
+                        isPlaying = true;
+                        document.getElementById('music-btn').innerHTML = '<i class="fa-solid fa-pause"></i>';
+                        document.getElementById('music-disc').style.animationPlayState = 'running';
+                    } catch(e) {
+                        console.log("Autoplay waiting for click");
+                    }
+                }
+            }, 500);
+        }
+
+        // เริ่มทำงานเมื่อเปิดหน้าเว็บ
+        window.onload = function() {
+            setTimeout(typeCode, 300);
+        };
+
+        // YouTube API
         var tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
         var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -558,26 +612,6 @@
             });
         }
 
-        // ปุ่มกดเข้าหน้าหลักแยกออกมาทำงานทันที 100%
-        function enterSpace() {
-            // สั่งให้หน้าจอ Welcome เลื่อนหายไปทันทีโดยไม่ต้องรอฟังชันก์อื่น
-            document.getElementById('welcome-screen').classList.add('hide');
-            
-            // รอให้หน้าจอเลื่อนแป๊บนึงค่อยสั่งให้เพลงพยายามเปิดตามหลัง
-            setTimeout(function() {
-                if (player && typeof player.playVideo === 'function') {
-                    try {
-                        player.playVideo();
-                        isPlaying = true;
-                        document.getElementById('music-btn').innerHTML = '<i class="fa-solid fa-pause"></i>';
-                        document.getElementById('music-disc').style.animationPlayState = 'running';
-                    } catch(e) {
-                        console.log("Autoplay waiting for user action");
-                    }
-                }
-            }, 400);
-        }
-
         function toggleTheme() {
             const current = document.documentElement.getAttribute('data-theme');
             const icon = document.getElementById('theme-icon');
@@ -595,34 +629,4 @@
             const disc = document.getElementById('music-disc');
             
             if (!isPlaying) {
-                if(player && typeof player.playVideo === 'function') {
-                    player.playVideo();
-                    isPlaying = true;
-                    btn.innerHTML = '<i class="fa-solid fa-pause"></i>';
-                    disc.style.animationPlayState = 'running';
-                }
-            } else {
-                if(player && typeof player.pauseVideo === 'function') {
-                    player.pauseVideo();
-                    isPlaying = false;
-                    btn.innerHTML = '<i class="fa-solid fa-play"></i>';
-                    disc.style.animationPlayState = 'paused';
-                }
-            }
-        }
-
-        let count = 0;
-        document.getElementById('cinnamon-pic').addEventListener('click', () => {
-            count++;
-            if(count === 5) {
-                document.getElementById('egg-modal').style.display = 'flex';
-                count = 0;
-            }
-        });
-
-        function closeEgg() {
-            document.getElementById('egg-modal').style.display = 'none';
-        }
-    </script>
-</body>
-</html>
+                if(player && typeof player.playVideo ===
