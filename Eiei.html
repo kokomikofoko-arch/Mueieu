@@ -21,7 +21,6 @@
             position: relative; z-index: 2;
         }
 
-        /* 📺 ปล่อยให้เครื่องเล่นโชว์เล็กๆ ด้านบนการ์ด เพื่อให้มือถือยอมเล่นเสียง */
         .yt-wrapper {
             margin-bottom: 20px;
             border-radius: 15px;
@@ -65,14 +64,12 @@
 <body>
 
     <div class="card">
-        <!-- 📺 กล่องวิดีโอแบบมินิมอล จิ้มเล่นตรงนี้ได้เลยเสียงจะออกชัวร์ -->
         <div class="yt-wrapper">
             <div id="youtube-player"></div>
         </div>
         <br>
         <button class="music-btn" onclick="togglePlay()">🎵 Play / Pause BGM</button>
 
-        <!-- 🏠 หน้าแรก -->
         <div id="page-intro" class="page active">
             <div class="header-icon">☁️</div>
             <h2>𓊆 Sen's Space 𓊇</h2>
@@ -85,7 +82,6 @@
             <button class="btn" onclick="showPage('page-1')"> 𓊆 Tap to Enter 𓊇 </button>
         </div>
 
-        <!-- 🌸 หน้าที่ 1 -->
         <div id="page-1" class="page">
             <div style="font-size: 32px; margin-bottom: 10px;">📋</div>
             <h2>𓊆 Contact Profile 𓊇</h2>
@@ -109,7 +105,6 @@
             <button class="btn" onclick="showPage('page-2')">𓊆 Go to Game IDs 𓊇</button>
         </div>
 
-        <!-- 🎮 หน้าที่ 2 -->
         <div id="page-2" class="page">
             <div style="font-size: 32px; margin-bottom: 10px;">🎮</div>
             <h2>𓊆 My Game IDs 𓊇</h2>
@@ -161,10 +156,10 @@
         var player;
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('youtube-player', {
-                height: '120', // ขนาดเล็กๆ กำลังน่ารัก
+                height: '120',
                 width: '200',
-                videoId: 'jLN0BbvYhVk',
-                playerVars: { 'autoplay': 0, 'loop': 1, 'playlist': 'jLN0BbvYhVk', 'controls': 1 }
+                videoId: 'rfIKmv46DRg', // รหัสเพลงใหม่ใส่ตรงนี้
+                playerVars: { 'autoplay': 0, 'loop': 1, 'playlist': 'rfIKmv46DRg', 'controls': 1 }
             });
         }
 
@@ -181,3 +176,4 @@
     </script>
 </body>
 </html>
+
