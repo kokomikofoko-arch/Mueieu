@@ -51,81 +51,6 @@
             padding: 20px 0;
         }
 
-        /* --- Hacker Terminal Screen --- */
-        #terminal-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #0b132b;
-            color: #48cae4;
-            font-family: monospace;
-            padding: 30px 20px;
-            z-index: 10000;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            transition: opacity 0.5s ease-out, transform 0.5s cubic-bezier(0.6, -0.28, 0.735, 0.045);
-        }
-
-        #terminal-screen.shatter {
-            opacity: 0;
-            transform: scale(1.4);
-            pointer-events: none;
-        }
-
-        .terminal-code {
-            font-family: monospace;
-            font-size: 0.95rem;
-            line-height: 1.6;
-            white-space: pre-wrap;
-            word-break: break-all;
-            width: 100%;
-            max-width: 600px;
-            text-align: left;
-            margin-bottom: 20px;
-            min-height: 180px;
-        }
-
-        /* ปุ่มกดเริ่มเจาะระบบป้องกันจอมืดค้าง */
-        .hack-btn {
-            padding: 15px 35px;
-            background: transparent;
-            border: 2px solid #48cae4;
-            color: #48cae4;
-            font-family: monospace;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 4px;
-            box-shadow: 0 0 15px rgba(72, 202, 228, 0.3);
-            transition: all 0.3s ease;
-            letter-spacing: 2px;
-        }
-
-        .hack-btn:hover {
-            background: #48cae4;
-            color: #0b132b;
-            box-shadow: 0 0 25px rgba(72, 202, 228, 0.7);
-        }
-
-        .cursor {
-            display: inline-block;
-            width: 8px;
-            height: 15px;
-            background: #48cae4;
-            animation: blink 0.7s infinite;
-            vertical-align: middle;
-            margin-left: 4px;
-        }
-
-        @keyframes blink {
-            50% { opacity: 0; }
-        }
-
         /* --- Main Bio Card --- */
         .bio-container {
             width: 100%;
@@ -429,13 +354,7 @@
 </head>
 <body>
 
-    <!-- หน้า Hacker Intro พร้อมปุ่มกระตุ้นระบบมือถือ -->
-    <div id="terminal-screen">
-        <div class="terminal-code" id="terminal-text">> SYSTEM STATUS: READY TO EXPLOIT...</div>
-        <button class="hack-btn" id="start-hack-btn" onclick="startHacking()">[ INITIALIZE HACK ]</button>
-    </div>
-
-    <!-- หน้าหลักรูปการ์ดไบโอ -->
+    <!-- หน้าหลักรูปการ์ดไบโอ (เปิดมาเจอเลย) -->
     <div class="bio-container">
         <div class="bio-card">
             
@@ -547,71 +466,7 @@
     </div>
 
     <script>
-        const lines = [
-            "root@zen_space:~# connecting to server...",
-            "status: SECURE CONNECTION ESTABLISHED.",
-            "root@zen_space:~# bypass_firewall --force",
-            "loading modules: [roblox] [rov] [minecraft] [freefire]...",
-            "root@zen_space:~# decrypting_user_profile --id:pirnname",
-            "searching data...",
-            "ACCESS GRANTED! WELCOME TO ZEN'S CLOUD SPACE ☁️"
-        ];
-
-        let lineIndex = 0;
-        let charIndex = 0;
-        const terminalText = document.getElementById("terminal-text");
-
-        // ฟังก์ชันเริ่มทำงานเมื่อกดปุ่มชัวร์ 100%
-        function startHacking() {
-            // ซ่อนปุ่มกดทันที
-            document.getElementById("start-hack-btn").style.display = "none";
-            terminalText.innerHTML = "";
-            typeCode();
-        }
-
-        function typeCode() {
-            if (lineIndex < lines.length) {
-                if (charIndex === 0) {
-                    terminalText.innerHTML += (lineIndex > 0 ? "\n" : "") + "> ";
-                }
-                terminalText.innerHTML += lines[lineIndex].charAt(charIndex);
-                charIndex++;
-                
-                if (charIndex < lines[lineIndex].length) {
-                    setTimeout(typeCode, 20);
-                } else {
-                    charIndex = 0;
-                    lineIndex++;
-                    setTimeout(typeCode, 250);
-                }
-            } else {
-                terminalText.innerHTML += '<span class="cursor"></span>';
-                setTimeout(breakTerminal, 800);
-            }
-        }
-
-        function breakTerminal() {
-            const screen = document.getElementById("terminal-screen");
-            if(screen) {
-                screen.classList.add("shatter");
-            }
-            
-            // เล่นเพลงอัตโนมัติ (ผ่านการกดปุ่มเคลียร์เงื่อนไขบราวเซอร์มือถือแล้ว)
-            setTimeout(function() {
-                if (player && typeof player.playVideo === 'function') {
-                    try {
-                        player.playVideo();
-                        isPlaying = true;
-                        document.getElementById('music-btn').innerHTML = '<i class="fa-solid fa-pause"></i>';
-                        document.getElementById('music-disc').style.animationPlayState = 'running';
-                    } catch(e) {
-                        console.log("Autoplay failed");
-                    }
-                }
-            }, 300);
-        }
-
-        // YouTube API
+        // YouTube API Load
         var tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
         var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -636,4 +491,51 @@
         }
 
         function toggleTheme() {
-            const current = document.document
+            const current = document.documentElement.getAttribute('data-theme');
+            const icon = document.getElementById('theme-icon');
+            if (current === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'light');
+                icon.innerHTML = '<i class="fa-solid fa-star"></i>';
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                icon.innerHTML = '<i class="fa-solid fa-moon"></i>';
+            }
+        }
+
+        function toggleMusic() {
+            const btn = document.getElementById('music-btn');
+            const disc = document.getElementById('music-disc');
+            
+            if (!isPlaying) {
+                if(player && typeof player.playVideo === 'function') {
+                    player.playVideo();
+                    isPlaying = true;
+                    btn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+                    disc.style.animationPlayState = 'running';
+                }
+            } else {
+                if(player && typeof player.pauseVideo === 'function') {
+                    player.pauseVideo();
+                    isPlaying = false;
+                    btn.innerHTML = '<i class="fa-solid fa-play"></i>';
+                    disc.style.animationPlayState = 'paused';
+                }
+            }
+        }
+
+        let count = 0;
+        document.getElementById('cinnamon-pic').addEventListener('click', () => {
+            count++;
+            if(count === 5) {
+                document.getElementById('egg-modal').style.display = 'flex';
+                count = 0;
+            }
+        });
+
+        function closeEgg() {
+            document.getElementById('egg-modal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
+
