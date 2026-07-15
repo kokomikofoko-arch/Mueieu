@@ -1,245 +1,9 @@
-<!DOCTYPE html>
-<html lang="th">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>𓊆 ☁️ Sen's Magical Space ✨ 𓊇</title>
-    <style>
-        /* ☁️ พื้นหลังขาว-ฟ้าพาสเทล ไล่เฉดหรูหราสบายตา */
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Kanit', sans-serif;
-            background: linear-gradient(135deg, #eef7ff 0%, #ffffff 50%, #e8f4fd 100%);
-            color: #4a5a6a;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-            padding: 40px 0;
-            /* 🪄 ตัวเมาส์ดีไซน์น่ารักแบบใหม่ */
-            cursor: url('https://cur.cursors-4u.net/symbols/sym-1/sym46.cur'), auto;
-        }
-
-        /* 🪄 ย้ายเอฟเฟกต์ก้อนเมฆและดาวตกให้ไปอยู่ "ด้านหลังการ์ด" (z-index: 1) */
-        .snowflake {
-            position: fixed;
-            top: -20px;
-            z-index: 1; /* อยู่ด้านหลังสุด */
-            pointer-events: none;
-            animation: fall linear infinite;
-        }
-        @keyframes fall {
-            to {
-                transform: translateY(110vh);
-            }
-        }
-
-        /* 🧼 การ์ดกระจกแก้วหรูหรา (Glassmorphism) อยู่ด้านหน้าเอฟเฟกต์ตก (z-index: 2) */
-        .card {
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.9);
-            border-radius: 35px;
-            padding: 40px 25px;
-            width: 85%;
-            max-width: 400px;
-            text-align: center;
-            box-shadow: 0 20px 50px rgba(174, 214, 241, 0.25), 
-                        inset 0 0 20px rgba(255, 255, 255, 0.6);
-            position: relative;
-            z-index: 2; /* ทับเมฆและดาวที่ตกมา */
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        /* 🎶 ปุ่มเพลงมินิมอล */
-        .music-btn {
-            background: rgba(255, 255, 255, 0.8);
-            border: 1px solid #bcdbf8;
-            padding: 10px 22px;
-            border-radius: 50px;
-            cursor: pointer;
-            color: #5aa1e3;
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 25px;
-            transition: 0.3s;
-            box-shadow: 0 4px 10px rgba(174, 214, 241, 0.15);
-            display: inline-block;
-        }
-        .music-btn:hover {
-            background: #eef7ff;
-            transform: scale(1.05);
-        }
-
-        /* ☁️ ไอคอนก้อนเมฆลอยดุ๊กดิ๊ก */
-        .header-icon {
-            font-size: 64px;
-            margin-bottom: 10px;
-            display: inline-block;
-            filter: drop-shadow(0 10px 10px rgba(174, 214, 241, 0.4));
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-
-        /* 🌟 หัวข้อและรายละเอียด */
-        h2 {
-            color: #5aa1e3;
-            font-size: 24px;
-            font-weight: 600;
-            margin-top: 10px;
-            margin-bottom: 8px;
-            letter-spacing: 1px;
-        }
-
-        .subtitle {
-            color: #8fa0b0;
-            font-size: 13px;
-            margin-bottom: 25px;
-            letter-spacing: 0.5px;
-        }
-
-        hr {
-            border: 0;
-            height: 1px;
-            background: linear-gradient(to right, rgba(188, 227, 248, 0), rgba(188, 227, 248, 0.8), rgba(188, 227, 248, 0));
-            margin: 25px 0;
-        }
-
-        /* 🧺 เมนูกล่องรายชื่อติดต่อ/ไอดีเกม */
-        ul {
-            list-style: none;
-            padding: 0;
-            text-align: left;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        li {
-            margin: 12px 0;
-            font-size: 14.5px;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 14px 20px;
-            border-radius: 20px;
-            border: 1px solid rgba(238, 247, 255, 0.8);
-            box-shadow: 0 4px 12px rgba(174, 214, 241, 0.1);
-            display: flex;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
-
-        li:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(174, 214, 241, 0.2);
-            border-color: #bcdbf8;
-        }
-
-        li span.emoji {
-            font-size: 18px;
-            margin-right: 15px;
-        }
-
-        li strong {
-            color: #5aa1e3;
-            font-weight: 600;
-            margin-right: 8px;
-        }
-
-        /* 📝 กล่องข้อความสไตล์การเล่นเกมและ Note */
-        .note-box {
-            background: rgba(255, 255, 255, 0.8);
-            padding: 20px;
-            border-radius: 24px;
-            border: 1px dashed #bcdbf8;
-            text-align: left;
-            font-size: 13.5px;
-            line-height: 1.6;
-            margin-top: 15px;
-            color: #5a6e7f;
-            box-shadow: 0 4px 15px rgba(174, 214, 241, 0.05);
-        }
-
-        .note-box h4 {
-            color: #5aa1e3;
-            margin-top: 0;
-            margin-bottom: 10px;
-            font-size: 15px;
-        }
-
-        .note-box ul {
-            padding-left: 0;
-        }
-
-        .note-box li.text-li {
-            background: none;
-            border: none;
-            padding: 2px 0;
-            margin: 6px 0;
-            box-shadow: none;
-            display: block;
-            font-size: 13px;
-        }
-
-        .note-box li.text-li:hover {
-            transform: none;
-            box-shadow: none;
-        }
-
-        /* ✈️ ปุ่มกดหลัก */
-        .btn {
-            background: linear-gradient(135deg, #74b3e9 0%, #4b92db 100%);
-            color: white;
-            border: none;
-            padding: 14px 35px;
-            font-size: 15px;
-            font-weight: bold;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 10px;
-            box-shadow: 0 8px 20px rgba(90, 161, 227, 0.3);
-            letter-spacing: 1px;
-            display: inline-block;
-            text-decoration: none;
-        }
-
-        .btn:hover {
-            transform: translateY(-2.5px);
-            box-shadow: 0 10px 25px rgba(90, 161, 227, 0.55);
-        }
-
-        /* 💚 ปุ่มไลน์แอดด่วน */
-        .btn-line {
-            background: linear-gradient(135deg, #6fdc8c 0%, #3ec260 100%);
-            box-shadow: 0 8px 20px rgba(62, 194, 96, 0.25);
-            margin-top: 20px;
-            margin-bottom: 5px;
-        }
-
-        .btn-line:hover {
-            box-shadow: 0 10px 25px rgba(62, 194, 96, 0.45);
-        }
-
-        /* ☁️ ระบบเปิด-ปิดหน้า */
-        .page { display: none; }
-        .page.active { display: block; }
-        .page-intro { text-align: center; }
-    </style>
-</head>
 <body>
 
-    <!-- 🎵 ไฟล์เสียงเพลง Lofi สบายหูเบาๆ -->
-    <audio id="myAudio" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-    </audio>
+    <!-- 🎵 เครื่องเล่นเพลง YouTube แบบซ่อนตัว (รองรับลิงก์คุณเซนแล้ว) -->
+    <div style="display:none;">
+        <div id="youtube-player"></div>
+    </div>
 
     <div class="card">
         <!-- ปุ่มเปิด/ปิดเพลง -->
@@ -258,7 +22,7 @@
             <button class="btn" onclick="showPage('page-1')"> 𓊆 Tap to Enter 𓊇 </button>
         </div>
 
-        <!-- 🌸 หน้าที่ 1: ข้อมูลการติดต่อ + ข้อมูลเวลาเล่นเกม -->
+        <!-- 🌸 หน้าที่ 1: ข้อมูลการติดต่อ -->
         <div id="page-1" class="page">
             <div style="font-size: 32px; margin-bottom: 10px;">📋</div>
             <h2>𓊆 Contact Profile 𓊇</h2>
@@ -271,7 +35,6 @@
                 <li><span class="emoji">🎮</span> <strong>Discord :</strong> pire_sun</li>
             </ul>
 
-            <!-- 📝 ข้อมูลการเล่นเกม (Gaming Life) -->
             <div class="note-box">
                 <h4>𓊆 🎮 My Gaming Life 𓊇</h4>
                 <ul style="width: 100%;">
@@ -285,7 +48,7 @@
             <button class="btn" onclick="showPage('page-2')">𓊆 Go to Game IDs 𓊇</button>
         </div>
 
-        <!-- 🎮 หน้าที่ 2: ไอดีเกม + โน้ตทักทาย + ปุ่มแอดไลน์ -->
+        <!-- 🎮 หน้าที่ 2: ไอดีเกม -->
         <div id="page-2" class="page">
             <div style="font-size: 32px; margin-bottom: 10px;">🎮</div>
             <h2>𓊆 My Game IDs 𓊇</h2>
@@ -299,7 +62,6 @@
                 <li><span class="emoji">🏡</span> <strong>Heartopia :</strong> Uid 361rde9f</li>
             </ul>
 
-            <!-- 📝 โน้ตทักทายเพิ่มเติม -->
             <div class="note-box">
                 <h4>✎ 𝙽𝚘𝚝𝚎 :</h4>
                 <p style="margin: 0; font-size: 13px;">
@@ -307,7 +69,6 @@
                 </p>
             </div>
 
-            <!-- 💚 ปุ่มเพิ่มเพื่อนในไลน์ด่วน -->
             <a href="https://line.me/ti/p/~catminda" target="_blank" class="btn btn-line">𓊆 💬 Add Line 𓊇</a>
 
             <hr>
@@ -315,40 +76,60 @@
         </div>
     </div>
 
-    <!-- 🪄 โค้ดระบบเอฟเฟกต์เบื้องหลัง และ เพลง -->
+    <!-- 🪄 โค้ดเอฟเฟกต์เบื้องหลัง และ ระบบเพลง YouTube API -->
     <script>
-        // 🌨️ ฟังก์ชันสุ่มปล่อย ก้อนเมฆ และ ดาววิบวับ ลอยตกลงมา (ด้านหลังการ์ด)
+        // 🌨️ เอฟเฟกต์เมฆและดาวตกด้านหลัง
         function createFall() {
             const span = document.createElement('span');
             span.innerHTML = Math.random() > 0.5 ? '☁️' : '✨';
             span.className = 'snowflake';
             span.style.left = Math.random() * 100 + 'vw';
             span.style.fontSize = Math.random() * 20 + 12 + 'px';
-            span.style.opacity = Math.random() * 0.6 + 0.3; // จางๆ ไม่กวนตา
-            span.style.animationDuration = Math.random() * 4 + 6 + 's'; // ตกช้าลง นุ่มนวลขึ้น
+            span.style.opacity = Math.random() * 0.5 + 0.2;
+            span.style.animationDuration = Math.random() * 4 + 6 + 's';
             document.body.appendChild(span);
             setTimeout(() => span.remove(), 10000);
         }
-        setInterval(createFall, 1200); // ชะลอความถี่ในการปล่อย เพื่อไม่ให้ดูรก
+        setInterval(createFall, 1200);
 
-        // 🎵 เปิด-ปิดเสียงเพลง
-        function togglePlay() {
-            var audio = document.getElementById("myAudio");
-            if (audio.paused) {
-                audio.play();
-            } else {
-                audio.pause();
-            }
+        // 🪄 เปลี่ยนหน้า
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
         }
 
-        // 🪄 เปลี่ยนหน้าแสดงผล
-        function showPage(pageId) {
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
+        // 🎵 โค้ดดึงระบบเพลงจาก YouTube มาทำงานหลังบ้าน
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-player', {
+                height: '0',
+                width: '0',
+                videoId: 'jLN0BbvYhVk', // ไอดีวิดีโอ YouTube ของคุณเซน
+                playerVars: {
+                    'loop': 1,
+                    'playlist': 'jLN0BbvYhVk'
+                }
             });
-            document.getElementById(pageId).classList.add('active');
+        }
+
+        // ปุ่มกด เปิด-ปิด เพลง
+        var isPlaying = false;
+        function togglePlay() {
+            if (!player) return;
+            if (!isPlaying) {
+                player.playVideo();
+                isPlaying = true;
+            } else {
+                player.pauseVideo();
+                isPlaying = false;
+            }
         }
     </script>
 
 </body>
-</html>
+
