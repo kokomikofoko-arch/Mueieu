@@ -65,8 +65,8 @@
             z-index: 10000;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
-            align-items: flex-start;
+            justify-content: center;
+            align-items: center;
             overflow: hidden;
             transition: opacity 0.5s ease-out, transform 0.5s cubic-bezier(0.6, -0.28, 0.735, 0.045);
         }
@@ -85,7 +85,31 @@
             word-break: break-all;
             width: 100%;
             max-width: 600px;
-            margin: 0 auto;
+            text-align: left;
+            margin-bottom: 20px;
+            min-height: 180px;
+        }
+
+        /* ปุ่มกดเริ่มเจาะระบบป้องกันจอมืดค้าง */
+        .hack-btn {
+            padding: 15px 35px;
+            background: transparent;
+            border: 2px solid #48cae4;
+            color: #48cae4;
+            font-family: monospace;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            box-shadow: 0 0 15px rgba(72, 202, 228, 0.3);
+            transition: all 0.3s ease;
+            letter-spacing: 2px;
+        }
+
+        .hack-btn:hover {
+            background: #48cae4;
+            color: #0b132b;
+            box-shadow: 0 0 25px rgba(72, 202, 228, 0.7);
         }
 
         .cursor {
@@ -405,9 +429,10 @@
 </head>
 <body>
 
-    <!-- หน้า Hacker Intro -->
+    <!-- หน้า Hacker Intro พร้อมปุ่มกระตุ้นระบบมือถือ -->
     <div id="terminal-screen">
-        <div class="terminal-code" id="terminal-text"></div>
+        <div class="terminal-code" id="terminal-text">> SYSTEM STATUS: READY TO EXPLOIT...</div>
+        <button class="hack-btn" id="start-hack-btn" onclick="startHacking()">[ INITIALIZE HACK ]</button>
     </div>
 
     <!-- หน้าหลักรูปการ์ดไบโอ -->
@@ -536,6 +561,14 @@
         let charIndex = 0;
         const terminalText = document.getElementById("terminal-text");
 
+        // ฟังก์ชันเริ่มทำงานเมื่อกดปุ่มชัวร์ 100%
+        function startHacking() {
+            // ซ่อนปุ่มกดทันที
+            document.getElementById("start-hack-btn").style.display = "none";
+            terminalText.innerHTML = "";
+            typeCode();
+        }
+
         function typeCode() {
             if (lineIndex < lines.length) {
                 if (charIndex === 0) {
@@ -549,7 +582,7 @@
                 } else {
                     charIndex = 0;
                     lineIndex++;
-                    setTimeout(typeCode, 300);
+                    setTimeout(typeCode, 250);
                 }
             } else {
                 terminalText.innerHTML += '<span class="cursor"></span>';
@@ -563,6 +596,7 @@
                 screen.classList.add("shatter");
             }
             
+            // เล่นเพลงอัตโนมัติ (ผ่านการกดปุ่มเคลียร์เงื่อนไขบราวเซอร์มือถือแล้ว)
             setTimeout(function() {
                 if (player && typeof player.playVideo === 'function') {
                     try {
@@ -571,14 +605,11 @@
                         document.getElementById('music-btn').innerHTML = '<i class="fa-solid fa-pause"></i>';
                         document.getElementById('music-disc').style.animationPlayState = 'running';
                     } catch(e) {
-                        console.log("Autoplay blocked by browser policy");
+                        console.log("Autoplay failed");
                     }
                 }
             }, 300);
         }
-
-        // บังคับให้เริ่มพิมพ์ทันทีที่สคริปต์ทำงานโดยไม่ต้องรอโหลดหน้าต่างเสร็จทั้งหมด
-        setTimeout(typeCode, 100);
 
         // YouTube API
         var tag = document.createElement('script');
@@ -605,28 +636,4 @@
         }
 
         function toggleTheme() {
-            const current = document.documentElement.getAttribute('data-theme');
-            const icon = document.getElementById('theme-icon');
-            if (current === 'dark') {
-                document.documentElement.setAttribute('data-theme', 'light');
-                icon.innerHTML = '<i class="fa-solid fa-star"></i>';
-            } else {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                icon.innerHTML = '<i class="fa-solid fa-moon"></i>';
-            }
-        }
-
-        function toggleMusic() {
-            const btn = document.getElementById('music-btn');
-            const disc = document.getElementById('music-disc');
-            
-            if (!isPlaying) {
-                if(player && typeof player.playVideo === 'function') {
-                    player.playVideo();
-                    isPlaying = true;
-                    btn.innerHTML = '<i class="fa-solid fa-pause"></i>';
-                    disc.style.animationPlayState = 'running';
-                }
-            } else {
-                if(player && typeof player.pauseVideo === 'function') {
-                    player
+            const current = document.document
