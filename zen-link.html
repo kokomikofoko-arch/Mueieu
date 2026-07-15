@@ -51,7 +51,7 @@
             padding: 20px 0;
         }
 
-        /* --- 1. Welcome Screen (Cinnamoroll Style) --- */
+        /* --- 1. Welcome Screen --- */
         #welcome-screen {
             position: fixed;
             top: 0;
@@ -127,7 +127,6 @@
             border: 3px solid rgba(255, 255, 255, 0.05);
         }
 
-        /* Dark Mode Toggle */
         .theme-toggle {
             position: absolute;
             top: 25px;
@@ -144,7 +143,6 @@
             transform: scale(1.2) rotate(15deg);
         }
 
-        /* Profile Section */
         .profile-area {
             margin-bottom: 25px;
         }
@@ -211,6 +209,7 @@
 
         .music-info i {
             animation: spin 4s linear infinite;
+            animation-play-state: paused;
         }
 
         .play-btn {
@@ -227,7 +226,6 @@
             transition: var(--transition);
         }
 
-        /* ซ่อนหน้าต่าง YouTube ตัวจริงไว้ข้างหลัง */
         #youtube-player-container {
             position: absolute;
             width: 1px;
@@ -252,7 +250,6 @@
             color: var(--text-sub);
         }
 
-        /* Grid Contacts (ส่วนที่ 1) */
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -292,7 +289,6 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.03);
         }
 
-        /* List Games (ส่วนที่ 2) */
         .game-list {
             display: flex;
             flex-direction: column;
@@ -328,7 +324,6 @@
             border: 1px solid rgba(0,0,0,0.05);
         }
 
-        /* About & Status (ส่วนที่ 3) */
         .about-box {
             background: linear-gradient(135deg, var(--btn-bg) 0%, var(--card-bg) 100%);
             padding: 20px;
@@ -363,7 +358,6 @@
             font-weight: 500;
         }
 
-        /* --- Easter Egg Modal --- */
         #egg-modal {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -401,7 +395,6 @@
             cursor: pointer;
         }
 
-        /* Animations */
         @keyframes float {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
@@ -446,7 +439,7 @@
                 <h2 class="name">เซน —</h2>
             </div>
 
-            <!-- กล่องเพลง (เปลี่ยนเพลงเป็น "ให้เธอรู้" เรียบร้อย) -->
+            <!-- กล่องเพลง -->
             <div class="music-box">
                 <div class="music-info">
                     <i class="fa-solid fa-compact-disc" id="music-disc"></i>
@@ -460,7 +453,6 @@
                 </button>
             </div>
 
-            <!-- แอบซ่อน YouTube API Player ไว้ในพื้นหลัง -->
             <div id="youtube-player-container">
                 <div id="player"></div>
             </div>
@@ -503,7 +495,7 @@
                 </div>
                 <div class="game-card">
                     <div class="game-name">⚔️ RoV</div>
-                    <div class="game-id">꒰ఎku͜͡ri໒꒱</div>
+                    <div class="game-id">꒰ಎku͜͡ri໒꒱</div>
                 </div>
                 <div class="game-card">
                     <div class="game-name">🧱 Minecraft</div>
@@ -531,7 +523,6 @@
         </div>
     </div>
 
-    <!-- หน้าต่างป๊อปอัปความลับ (Easter Egg) -->
     <div id="egg-modal">
         <div class="egg-box">
             <h2>☁️ Secret Found!</h2>
@@ -549,17 +540,18 @@
 
         var player;
         var isPlaying = false;
+        var youtubeId = 'rfIKmv46DRg'; // แก้ไขไอดีเพลงให้ถูกต้อง
 
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
                 height: '100',
                 width: '100',
-                videoId: 'rfIKmv46DRg', // ไอดีของเพลง "ให้เธอรู้"
+                videoId: youtubeId,
                 playerVars: {
                     'autoplay': 0,
                     'controls': 0,
                     'loop': 1,
-                    'playlist': 'rfIKmv46DRg'
+                    'playlist': youtubeId
                 },
                 events: {
                     'onReady': onPlayerReady
@@ -568,17 +560,24 @@
         }
 
         function onPlayerReady(event) {
-            // โหลดระบบเรียบร้อย
+            // ระบบพร้อมทำงาน
         }
 
+        // ปุ่มกดเข้าหน้าหลัก (คราวนี้เลื่อนเปิดแน่นอน 100%)
         function enterSpace() {
             document.getElementById('welcome-screen').classList.add('hide');
+            
+            // พยายามเปิดเพลงหลังจากหน้าเว็บเปิด
             setTimeout(() => {
                 if(player && typeof player.playVideo === 'function') {
-                    player.playVideo();
-                    isPlaying = true;
-                    document.getElementById('music-btn').innerHTML = '<i class="fa-solid fa-pause"></i>';
-                    document.getElementById('music-disc').style.animationPlayState = 'running';
+                    try {
+                        player.playVideo();
+                        isPlaying = true;
+                        document.getElementById('music-btn').innerHTML = '<i class="fa-solid fa-pause"></i>';
+                        document.getElementById('music-disc').style.animationPlayState = 'running';
+                    } catch(e) {
+                        console.log("Autoplay blocked or player not ready");
+                    }
                 }
             }, 500);
         }
@@ -600,20 +599,24 @@
             const disc = document.getElementById('music-disc');
             
             if (!isPlaying) {
-                player.playVideo();
-                isPlaying = true;
-                btn.innerHTML = '<i class="fa-solid fa-pause"></i>';
-                disc.style.animationPlayState = 'running';
+                if(player && typeof player.playVideo === 'function') {
+                    player.playVideo();
+                    isPlaying = true;
+                    btn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+                    disc.style.animationPlayState = 'running';
+                }
             } else {
-                player.pauseVideo();
-                isPlaying = false;
-                btn.innerHTML = '<i class="fa-solid fa-play"></i>';
-                disc.style.animationPlayState = 'paused';
+                if(player && typeof player.pauseVideo === 'function') {
+                    player.pauseVideo();
+                    isPlaying = false;
+                    btn.innerHTML = '<i class="fa-solid fa-play"></i>';
+                    disc.style.animationPlayState = 'paused';
+                }
             }
         }
 
         let count = 0;
-        document.getElementById('cinnamon-pic').ad dEventListener('click', () => {
+        document.getElementById('cinnamon-pic').addEventListener('click', () => {
             count++;
             if(count === 5) {
                 document.getElementById('egg-modal').style.display = 'flex';
@@ -626,5 +629,5 @@
         }
     </script>
 </body>
-</html>
+                        </html>
 
