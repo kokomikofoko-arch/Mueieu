@@ -68,19 +68,19 @@
             justify-content: flex-start;
             align-items: flex-start;
             overflow: hidden;
-            transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+            transition: opacity 0.5s ease-out, transform 0.5s cubic-bezier(0.6, -0.28, 0.735, 0.045);
         }
 
         #terminal-screen.shatter {
             opacity: 0;
-            transform: scale(1.5);
+            transform: scale(1.4);
             pointer-events: none;
         }
 
         .terminal-code {
             font-family: monospace;
             font-size: 0.95rem;
-            line-height: 1.5;
+            line-height: 1.6;
             white-space: pre-wrap;
             word-break: break-all;
             width: 100%;
@@ -405,7 +405,7 @@
 </head>
 <body>
 
-    <!-- หน้า Hacker Intro (พิมพ์โค้ดอัตโนมัติ) -->
+    <!-- หน้า Hacker Intro -->
     <div id="terminal-screen">
         <div class="terminal-code" id="terminal-text"></div>
     </div>
@@ -522,7 +522,6 @@
     </div>
 
     <script>
-        // ระบบพิมพ์โค้ดแฮกเกอร์อัตโนมัติ
         const lines = [
             "root@zen_space:~# connecting to server...",
             "status: SECURE CONNECTION ESTABLISHED.",
@@ -542,33 +541,28 @@
                 if (charIndex === 0) {
                     terminalText.innerHTML += (lineIndex > 0 ? "\n" : "") + "> ";
                 }
-                
                 terminalText.innerHTML += lines[lineIndex].charAt(charIndex);
                 charIndex++;
                 
-                // ความเร็วในการพิมพ์ตัวอักษรต่อตัว (หน่วยมิลลิวินาที)
-                let speed = 25; 
                 if (charIndex < lines[lineIndex].length) {
-                    setTimeout(typeCode, speed);
+                    setTimeout(typeCode, 20);
                 } else {
                     charIndex = 0;
                     lineIndex++;
-                    // เว้นช่วงเวลาก่อนขึ้นบรรทัดใหม่
-                    setTimeout(typeCode, 400); 
+                    setTimeout(typeCode, 300);
                 }
             } else {
-                // เพิ่มเคอร์เซอร์กระพริบปิดท้าย
                 terminalText.innerHTML += '<span class="cursor"></span>';
-                // พอพิมพ์เสร็จหมด รอ 1 วินาทีแล้วระเบิดเข้าหน้าหลัก
-                setTimeout(breakTerminal, 1000);
+                setTimeout(breakTerminal, 800);
             }
         }
 
         function breakTerminal() {
             const screen = document.getElementById("terminal-screen");
-            screen.classList.add("shatter");
+            if(screen) {
+                screen.classList.add("shatter");
+            }
             
-            // เปิดเพลงอัตโนมัติหลังจากเข้าหน้าหลัก
             setTimeout(function() {
                 if (player && typeof player.playVideo === 'function') {
                     try {
@@ -577,16 +571,14 @@
                         document.getElementById('music-btn').innerHTML = '<i class="fa-solid fa-pause"></i>';
                         document.getElementById('music-disc').style.animationPlayState = 'running';
                     } catch(e) {
-                        console.log("Autoplay waiting for click");
+                        console.log("Autoplay blocked by browser policy");
                     }
                 }
-            }, 500);
+            }, 300);
         }
 
-        // เริ่มทำงานเมื่อเปิดหน้าเว็บ
-        window.onload = function() {
-            setTimeout(typeCode, 300);
-        };
+        // บังคับให้เริ่มพิมพ์ทันทีที่สคริปต์ทำงานโดยไม่ต้องรอโหลดหน้าต่างเสร็จทั้งหมด
+        setTimeout(typeCode, 100);
 
         // YouTube API
         var tag = document.createElement('script');
@@ -629,4 +621,12 @@
             const disc = document.getElementById('music-disc');
             
             if (!isPlaying) {
-                if(player && typeof player.playVideo ===
+                if(player && typeof player.playVideo === 'function') {
+                    player.playVideo();
+                    isPlaying = true;
+                    btn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+                    disc.style.animationPlayState = 'running';
+                }
+            } else {
+                if(player && typeof player.pauseVideo === 'function') {
+                    player
