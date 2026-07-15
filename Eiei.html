@@ -22,11 +22,8 @@
         }
 
         .yt-wrapper {
-            margin-bottom: 20px;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            display: inline-block;
+            margin-bottom: 20px; border-radius: 15px; overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: inline-block;
         }
 
         .music-btn {
@@ -51,12 +48,33 @@
         .note-box { background: rgba(255, 255, 255, 0.8); padding: 20px; border-radius: 24px; border: 1px dashed #bcdbf8; text-align: left; font-size: 13.5px; line-height: 1.6; margin-top: 15px; }
         .note-box h4 { color: #5aa1e3; margin-top: 0; margin-bottom: 10px; }
         .note-box li.text-li { background: none; border: none; padding: 2px 0; margin: 6px 0; box-shadow: none; display: block; font-size: 13px; }
+        
         .btn {
             background: linear-gradient(135deg, #74b3e9 0%, #4b92db 100%); color: white; border: none; padding: 14px 35px; font-size: 15px; font-weight: bold;
             border-radius: 50px; cursor: pointer; transition: 0.3s; margin-top: 10px; box-shadow: 0 8px 20px rgba(90, 161, 227, 0.3); display: inline-block; text-decoration: none;
         }
         .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(90, 161, 227, 0.5); }
         .btn-line { background: linear-gradient(135deg, #6fdc8c 0%, #3ec260 100%); box-shadow: 0 8px 20px rgba(62, 194, 96, 0.25); margin-top: 20px; }
+        
+        /* 💬 สไตล์กล่องข้อความ */
+        .comment-input {
+            width: 90%; padding: 12px; margin: 8px 0; border: 1px solid #bcdbf8;
+            border-radius: 15px; font-family: 'Kanit', sans-serif; font-size: 14px; outline: none;
+            background: rgba(255, 255, 255, 0.9);
+        }
+        .comment-area { height: 80px; resize: none; }
+        .comment-list {
+            margin-top: 20px; text-align: left; max-height: 250px; overflow-y: auto;
+            padding-right: 5px;
+        }
+        .comment-item {
+            background: rgba(255, 255, 255, 0.9); padding: 12px 15px; border-radius: 18px;
+            margin-bottom: 10px; border: 1px solid #eef7ff; box-shadow: 0 4px 10px rgba(174,214,241,0.1);
+        }
+        .comment-name { font-weight: bold; color: #5aa1e3; font-size: 13px; margin-bottom: 4px; }
+        .comment-text { font-size: 13.5px; color: #5a6a7a; word-break: break-word; }
+        .comment-time { font-size: 10px; color: #b0c4de; text-align: right; margin-top: 5px; }
+
         .page { display: none; }
         .page.active { display: block; }
     </style>
@@ -70,6 +88,7 @@
         <br>
         <button class="music-btn" onclick="togglePlay()">🎵 Play / Pause BGM</button>
 
+        <!-- 🏠 หน้าแรก -->
         <div id="page-intro" class="page active">
             <div class="header-icon">☁️</div>
             <h2>𓊆 Sen's Space 𓊇</h2>
@@ -79,9 +98,13 @@
                 ยินดีต้อนรับสู่พื้นที่มินิมอลสีฟ้าคลีนๆ<br>
                 กดปุ่มด้านล่างเพื่อทำความรู้จักกันนะคับ ✨
             </p>
-            <button class="btn" onclick="showPage('page-1')"> 𓊆 Tap to Enter 𓊇 </button>
+            <button class="btn" onclick="showPage('page-1')" style="margin-bottom: 10px;"> 𓊆 Tap to Enter 𓊇 </button>
+            <br>
+            <!-- ปุ่มใหม่เพื่อไปหน้าคอมเม้นต์ -->
+            <button class="btn" style="background: linear-gradient(135deg, #a3cbf3 0%, #74b3e9 100%);" onclick="showPage('page-comment')"> 𓊆 💬 Guestbook 𓊇 </button>
         </div>
 
+        <!-- 🌸 หน้าที่ 1 -->
         <div id="page-1" class="page">
             <div style="font-size: 32px; margin-bottom: 10px;">📋</div>
             <h2>𓊆 Contact Profile 𓊇</h2>
@@ -105,6 +128,7 @@
             <button class="btn" onclick="showPage('page-2')">𓊆 Go to Game IDs 𓊇</button>
         </div>
 
+        <!-- 🎮 หน้าที่ 2 -->
         <div id="page-2" class="page">
             <div style="font-size: 32px; margin-bottom: 10px;">🎮</div>
             <h2>𓊆 My Game IDs 𓊇</h2>
@@ -124,6 +148,32 @@
                 </p>
             </div>
             <a href="https://line.me/ti/p/~catminda" target="_blank" class="btn btn-line">𓊆 💬 Add Line 𓊇</a>
+            <hr>
+            <button class="btn" style="margin-bottom: 15px;" onclick="showPage('page-intro')">𓊆 Back to Home 𓊇</button>
+        </div>
+
+        <!-- 💬 หน้าใหม่: หน้ากล่องคอมเม้นต์ (Guestbook) -->
+        <div id="page-comment" class="page">
+            <div style="font-size: 32px; margin-bottom: 10px;">💬</div>
+            <h2>𓊆 Guestbook 𓊇</h2>
+            <div class="subtitle">พิมพ์ข้อความทิ้งไว้ทักทายเซนได้นะคับ</div>
+            <hr>
+            
+            <!-- ฟอร์มพิมพ์คอมเม้นต์ -->
+            <input type="text" id="visitor-name" class="comment-input" placeholder="ชื่อของคุณ...">
+            <textarea id="visitor-msg" class="comment-input comment-area" placeholder="พิมพ์ข้อความที่นี่..."></textarea>
+            <button class="btn" style="padding: 10px 25px; font-size: 13px;" onclick="addComment()">ส่งข้อความ ✨</button>
+            
+            <!-- รายการคอมเม้นต์ที่จะแสดง -->
+            <div class="comment-list" id="comment-box">
+                <!-- คอมเม้นต์เริ่มต้นตัวอย่าง -->
+                <div class="comment-item">
+                    <div class="comment-name">✨ เจมีนาย (AI)</div>
+                    <div class="comment-text">ยินดีด้วยกับหน้ากล่องคอมเม้นต์ใหม่สุดน่ารักครับคุณเซน! 🩵☁️</div>
+                    <div class="comment-time">ระบบอัตโนมัติ</div>
+                </div>
+            </div>
+
             <hr>
             <button class="btn" style="margin-bottom: 15px;" onclick="showPage('page-intro')">𓊆 Back to Home 𓊇</button>
         </div>
@@ -148,6 +198,69 @@
             document.getElementById(pageId).classList.add('active');
         }
 
+        // 📝 ระบบบันทึกและดึงคอมเม้นต์ด้วย LocalStorage (เซฟลงเครื่องคนเปิด)
+        window.onload = function() {
+            loadComments();
+        };
+
+        function addComment() {
+            var nameInput = document.getElementById("visitor-name");
+            var msgInput = document.getElementById("visitor-msg");
+            
+            var name = nameInput.value.trim();
+            var msg = msgInput.value.trim();
+            
+            if(name === "" || msg === "") {
+                alert("กรุณากรอกชื่อและข้อความด้วยนะคัปปป! 🥺");
+                return;
+            }
+            
+            var newComment = {
+                name: name,
+                text: msg,
+                time: new Date().toLocaleString('th-TH', { hour12: false })
+            };
+            
+            var comments = JSON.parse(localStorage.getItem("sen_comments")) || [];
+            comments.unshift(newComment); // เอาคอมเม้นต์ใหม่ขึ้นก่อน
+            localStorage.setItem("sen_comments", JSON.stringify(comments));
+            
+            nameInput.value = "";
+            msgInput.value = "";
+            loadComments();
+        }
+
+        function loadComments() {
+            var comments = JSON.parse(localStorage.getItem("sen_comments")) || [];
+            var box = document.getElementById("comment-box");
+            
+            // ใส่คอมเม้นต์ตั้งต้นไว้เสมอ
+            var html = `
+                <div class="comment-item">
+                    <div class="comment-name">✨ เจมีนาย (AI)</div>
+                    <div class="comment-text">ยินดีด้วยกับหน้ากล่องคอมเม้นต์ใหม่สุดน่ารักครับคุณเซน! 🩵☁️</div>
+                    <div class="comment-time">ระบบอัตโนมัติ</div>
+                </div>
+            `;
+            
+            comments.forEach(function(item) {
+                html += `
+                    <div class="comment-item">
+                        <div class="comment-name">👤 ${escapeHtml(item.name)}</div>
+                        <div class="comment-text">${escapeHtml(item.text)}</div>
+                        <div class="comment-time">${item.time}</div>
+                    </div>
+                `;
+            });
+            
+            box.innerHTML = html;
+        }
+
+        function escapeHtml(text) {
+            return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+        }
+
+        // ระบบ YouTube
         var tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
         var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -158,12 +271,11 @@
             player = new YT.Player('youtube-player', {
                 height: '120',
                 width: '200',
-                videoId: 'rfIKmv46DRg', // รหัสเพลงใหม่ใส่ตรงนี้
+                videoId: 'rfIKmv46DRg',
                 playerVars: { 'autoplay': 0, 'loop': 1, 'playlist': 'rfIKmv46DRg', 'controls': 1 }
             });
         }
 
-        var isPlaying = false;
         function togglePlay() {
             if (!player) return;
             var state = player.getPlayerState();
@@ -176,4 +288,3 @@
     </script>
 </body>
 </html>
-
