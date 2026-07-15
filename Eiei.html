@@ -5,84 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>𓊆 ☁️ Sen's Magical Space ✨ 𓊇</title>
     <style>
-        /* ☁️ พื้นหลังขาว-ฟ้าพาสเทล มินิมอลสบายตา */
         body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Kanit', sans-serif;
+            margin: 0; padding: 0; font-family: 'Kanit', sans-serif;
             background: linear-gradient(135deg, #eef7ff 0%, #ffffff 50%, #e8f4fd 100%);
-            color: #4a5a6a;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-            padding: 40px 0;
+            color: #4a5a6a; display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; overflow-x: hidden; position: relative; padding: 40px 0;
         }
-
-        /* 🪄 เอฟเฟกต์ก้อนเมฆและดาวตก ลอยนุ่มๆ อยู่ด้านหลังการ์ด */
-        .snowflake {
-            position: fixed;
-            top: -20px;
-            z-index: 1;
-            pointer-events: none;
-            animation: fall linear infinite;
-        }
-        @keyframes fall {
-            to { transform: translateY(110vh); }
-        }
-
-        /* 🧼 การ์ดกระจกแก้วหรูหรา ทับเอฟเฟกต์ตกไม่ให้บังตา */
+        .snowflake { position: fixed; top: -20px; z-index: 1; pointer-events: none; animation: fall linear infinite; }
+        @keyframes fall { to { transform: translateY(110vh); } }
+        
         .card {
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.9);
-            border-radius: 35px;
-            padding: 40px 25px;
-            width: 85%;
-            max-width: 400px;
-            text-align: center;
-            box-shadow: 0 20px 50px rgba(174, 214, 241, 0.25);
-            position: relative;
-            z-index: 2;
+            background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.9); border-radius: 35px; padding: 40px 25px;
+            width: 85%; max-width: 400px; text-align: center; box-shadow: 0 20px 50px rgba(174, 214, 241, 0.25);
+            position: relative; z-index: 2;
         }
 
-        /* 🎶 ปุ่มเพลงมินิมอล */
-        .music-btn {
-            background: rgba(255, 255, 255, 0.8);
-            border: 1px solid #bcdbf8;
-            padding: 10px 22px;
-            border-radius: 50px;
-            cursor: pointer;
-            color: #5aa1e3;
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 25px;
+        /* 📺 ปล่อยให้เครื่องเล่นโชว์เล็กๆ ด้านบนการ์ด เพื่อให้มือถือยอมเล่นเสียง */
+        .yt-wrapper {
+            margin-bottom: 20px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             display: inline-block;
-            transition: 0.3s;
+        }
+
+        .music-btn {
+            background: rgba(255, 255, 255, 0.8); border: 1px solid #bcdbf8; padding: 10px 22px;
+            border-radius: 50px; cursor: pointer; color: #5aa1e3; font-size: 13px; font-weight: 600;
+            margin-bottom: 25px; display: inline-block; transition: 0.3s;
         }
         .music-btn:hover { background: #eef7ff; transform: scale(1.05); }
-
-        /* ☁️ ไอคอนก้อนเมฆลอยดุ๊กดิ๊ก */
-        .header-icon {
-            font-size: 64px;
-            margin-bottom: 10px;
-            display: inline-block;
-            animation: float 3s ease-in-out infinite;
-        }
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-
+        .header-icon { font-size: 64px; margin-bottom: 10px; display: inline-block; animation: float 3s ease-in-out infinite; }
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
         h2 { color: #5aa1e3; font-size: 24px; font-weight: 600; margin-top: 10px; margin-bottom: 8px; }
         .subtitle { color: #8fa0b0; font-size: 13px; margin-bottom: 25px; }
         hr { border: 0; height: 1px; background: linear-gradient(to right, rgba(188, 227, 248, 0), rgba(188, 227, 248, 0.8), rgba(188, 227, 248, 0)); margin: 25px 0; }
-
-        /* 🧺 รายการข้อมูลการติดต่อ */
         ul { list-style: none; padding: 0; text-align: left; margin: 0 auto; width: 100%; }
         li {
             margin: 12px 0; font-size: 14px; background: rgba(255, 255, 255, 0.9);
@@ -91,42 +49,30 @@
         }
         li span.emoji { font-size: 18px; margin-right: 15px; }
         li strong { color: #5aa1e3; font-weight: 600; margin-right: 8px; }
-
-        /* 📝 กล่องโน้ตไลฟ์สไตล์ */
-        .note-box {
-            background: rgba(255, 255, 255, 0.8); padding: 20px; border-radius: 24px;
-            border: 1px dashed #bcdbf8; text-align: left; font-size: 13.5px; line-height: 1.6; margin-top: 15px;
-        }
+        .note-box { background: rgba(255, 255, 255, 0.8); padding: 20px; border-radius: 24px; border: 1px dashed #bcdbf8; text-align: left; font-size: 13.5px; line-height: 1.6; margin-top: 15px; }
         .note-box h4 { color: #5aa1e3; margin-top: 0; margin-bottom: 10px; }
         .note-box li.text-li { background: none; border: none; padding: 2px 0; margin: 6px 0; box-shadow: none; display: block; font-size: 13px; }
-
-        /* ✈️ ปุ่มกด */
         .btn {
-            background: linear-gradient(135deg, #74b3e9 0%, #4b92db 100%);
-            color: white; border: none; padding: 14px 35px; font-size: 15px; font-weight: bold;
-            border-radius: 50px; cursor: pointer; transition: 0.3s; margin-top: 10px;
-            box-shadow: 0 8px 20px rgba(90, 161, 227, 0.3); display: inline-block; text-decoration: none;
+            background: linear-gradient(135deg, #74b3e9 0%, #4b92db 100%); color: white; border: none; padding: 14px 35px; font-size: 15px; font-weight: bold;
+            border-radius: 50px; cursor: pointer; transition: 0.3s; margin-top: 10px; box-shadow: 0 8px 20px rgba(90, 161, 227, 0.3); display: inline-block; text-decoration: none;
         }
         .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(90, 161, 227, 0.5); }
         .btn-line { background: linear-gradient(135deg, #6fdc8c 0%, #3ec260 100%); box-shadow: 0 8px 20px rgba(62, 194, 96, 0.25); margin-top: 20px; }
-
-        /* ☁️ ระบบจัดการหน้า */
         .page { display: none; }
         .page.active { display: block; }
     </style>
 </head>
 <body>
 
-    <!-- 🎵 ส่วนของ YouTube Player หลังบ้าน -->
-    <div style="display:none;">
-        <div id="youtube-player"></div>
-    </div>
-
     <div class="card">
-        <!-- ปุ่มเปิด/ปิดเพลง -->
+        <!-- 📺 กล่องวิดีโอแบบมินิมอล จิ้มเล่นตรงนี้ได้เลยเสียงจะออกชัวร์ -->
+        <div class="yt-wrapper">
+            <div id="youtube-player"></div>
+        </div>
+        <br>
         <button class="music-btn" onclick="togglePlay()">🎵 Play / Pause BGM</button>
 
-        <!-- 🏠 หน้าแรก: Welcome Cloud -->
+        <!-- 🏠 หน้าแรก -->
         <div id="page-intro" class="page active">
             <div class="header-icon">☁️</div>
             <h2>𓊆 Sen's Space 𓊇</h2>
@@ -139,7 +85,7 @@
             <button class="btn" onclick="showPage('page-1')"> 𓊆 Tap to Enter 𓊇 </button>
         </div>
 
-        <!-- 🌸 หน้าที่ 1: ข้อมูลการติดต่อ -->
+        <!-- 🌸 หน้าที่ 1 -->
         <div id="page-1" class="page">
             <div style="font-size: 32px; margin-bottom: 10px;">📋</div>
             <h2>𓊆 Contact Profile 𓊇</h2>
@@ -151,7 +97,6 @@
                 <li><span class="emoji">📸</span> <strong>IG :</strong> pirnname , pirn.name</li>
                 <li><span class="emoji">🎮</span> <strong>Discord :</strong> pire_sun</li>
             </ul>
-
             <div class="note-box">
                 <h4>𓊆 🎮 My Gaming Life 𓊇</h4>
                 <ul style="width: 100%;">
@@ -164,7 +109,7 @@
             <button class="btn" onclick="showPage('page-2')">𓊆 Go to Game IDs 𓊇</button>
         </div>
 
-        <!-- 🎮 หน้าที่ 2: ไอดีเกม -->
+        <!-- 🎮 หน้าที่ 2 -->
         <div id="page-2" class="page">
             <div style="font-size: 32px; margin-bottom: 10px;">🎮</div>
             <h2>𓊆 My Game IDs 𓊇</h2>
@@ -177,21 +122,18 @@
                 <li><span class="emoji">⛏️</span> <strong>Minecraft :</strong> SeNkA4032</li>
                 <li><span class="emoji">🏡</span> <strong>Heartopia :</strong> Uid 361rde9f</li>
             </ul>
-
             <div class="note-box">
                 <h4>✎ 𝙽𝚘𝚝𝚎 :</h4>
                 <p style="margin: 0; font-size: 13px;">
-                    ทักมาชวนเล่นเกมได้ตลอดเลยนะ! อยู่ที่ว่าจะอ่านไหม อิอิ จริงๆ เป็นคนอารมณ์ดีครับ ถ้ารู้จักใหม่ๆ อาจจะดูสุภาพหน่อย แต่ไม่ต้องห่วง No Toxic แน่นอน 100%!
+                    ทักมาชวนเล่นเกมได้ตลอดเลยนะ! อยู่ที่ว่าจะอ่านไหม อารมณ์ดี No Toxic แน่นอน 100%!
                 </p>
             </div>
-
             <a href="https://line.me/ti/p/~catminda" target="_blank" class="btn btn-line">𓊆 💬 Add Line 𓊇</a>
             <hr>
             <button class="btn" style="margin-bottom: 15px;" onclick="showPage('page-intro')">𓊆 Back to Home 𓊇</button>
         </div>
     </div>
 
-    <!-- 🪄 ระบบเบหลังบ้านทั้งหมด (เมฆตก + ระบบ YouTube) -->
     <script>
         function createFall() {
             const span = document.createElement('span');
@@ -211,7 +153,6 @@
             document.getElementById(pageId).classList.add('active');
         }
 
-        // ระบบดึงเพลง YouTube 
         var tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
         var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -220,24 +161,23 @@
         var player;
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('youtube-player', {
-                height: '0', width: '0',
+                height: '120', // ขนาดเล็กๆ กำลังน่ารัก
+                width: '200',
                 videoId: 'jLN0BbvYhVk',
-                playerVars: { 'loop': 1, 'playlist': 'jLN0BbvYhVk' }
+                playerVars: { 'autoplay': 0, 'loop': 1, 'playlist': 'jLN0BbvYhVk', 'controls': 1 }
             });
         }
 
         var isPlaying = false;
         function togglePlay() {
             if (!player) return;
-            if (!isPlaying) {
-                player.playVideo();
-                isPlaying = true;
-            } else {
+            var state = player.getPlayerState();
+            if (state == 1) {
                 player.pauseVideo();
-                isPlaying = false;
+            } else {
+                player.playVideo();
             }
         }
     </script>
 </body>
 </html>
-
