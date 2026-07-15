@@ -69,6 +69,7 @@
 
         #welcome-screen.hide {
             transform: translateY(-100%);
+            pointer-events: none; /* ป้องกันการบล็อกคลิกหลังซ่อน */
         }
 
         .welcome-avatar {
@@ -417,6 +418,7 @@
     <div id="welcome-screen">
         <div class="welcome-avatar">☁️</div>
         <h1 class="welcome-title">Welcome to Zen's Space</h1>
+        <!-- แก้ไขฟังก์ชันตรงนี้ให้ทำงานทันทีไม่ต้องรอ YouTube -->
         <button class="enter-btn" onclick="enterSpace()">เข้ามาเล๊ยย ✨</button>
     </div>
 
@@ -532,7 +534,7 @@
     </div>
 
     <script>
-        // โหลดระบบควบคุม YouTube API
+        // โหลดระบบควบคุม YouTube API แยกต่างหาก
         var tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
         var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -540,7 +542,7 @@
 
         var player;
         var isPlaying = false;
-        var youtubeId = 'rfIKmv46DRg'; // แก้ไขไอดีเพลงให้ถูกต้อง
+        var youtubeId = 'rfIKmv46DRg'; 
 
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
@@ -552,34 +554,28 @@
                     'controls': 0,
                     'loop': 1,
                     'playlist': youtubeId
-                },
-                events: {
-                    'onReady': onPlayerReady
                 }
             });
         }
 
-        function onPlayerReady(event) {
-            // ระบบพร้อมทำงาน
-        }
-
-        // ปุ่มกดเข้าหน้าหลัก (คราวนี้เลื่อนเปิดแน่นอน 100%)
+        // ปุ่มกดเข้าหน้าหลักแยกออกมาทำงานทันที 100%
         function enterSpace() {
+            // สั่งให้หน้าจอ Welcome เลื่อนหายไปทันทีโดยไม่ต้องรอฟังชันก์อื่น
             document.getElementById('welcome-screen').classList.add('hide');
             
-            // พยายามเปิดเพลงหลังจากหน้าเว็บเปิด
-            setTimeout(() => {
-                if(player && typeof player.playVideo === 'function') {
+            // รอให้หน้าจอเลื่อนแป๊บนึงค่อยสั่งให้เพลงพยายามเปิดตามหลัง
+            setTimeout(function() {
+                if (player && typeof player.playVideo === 'function') {
                     try {
                         player.playVideo();
                         isPlaying = true;
                         document.getElementById('music-btn').innerHTML = '<i class="fa-solid fa-pause"></i>';
                         document.getElementById('music-disc').style.animationPlayState = 'running';
                     } catch(e) {
-                        console.log("Autoplay blocked or player not ready");
+                        console.log("Autoplay waiting for user action");
                     }
                 }
-            }, 500);
+            }, 400);
         }
 
         function toggleTheme() {
@@ -629,5 +625,4 @@
         }
     </script>
 </body>
-                        </html>
-
+</html>
