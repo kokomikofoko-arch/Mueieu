@@ -3,139 +3,210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>โปรไฟล์ของเซน</title>
+    <title>𓊆 ☁️ Sen's Magical Space ✨ 𓊇</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f0f4f8;
-            color: #333;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            margin: 0; padding: 0; font-family: 'Kanit', sans-serif;
+            background: linear-gradient(135deg, #eef7ff 0%, #ffffff 50%, #e8f4fd 100%);
+            color: #4a5a6a; display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; overflow-x: hidden; position: relative; padding: 40px 0;
         }
-        .container {
-            background-color: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            max-width: 500px;
-            width: 100%;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        h1 { color: #2b6cb0; margin-bottom: 5px; }
-        .nickname { font-size: 1.2rem; color: #4a5568; margin-bottom: 20px; }
-        .game-card {
-            background-color: #edf2f7;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            text-align: left;
-        }
-        .game-title { font-weight: bold; color: #2d3748; font-size: 1.1rem; }
-        .game-detail { color: #718096; font-size: 0.95rem; margin-top: 5px; }
+        .snowflake { position: fixed; top: -20px; z-index: 1; pointer-events: none; animation: fall linear infinite; }
+        @keyframes fall { to { transform: translateY(110vh); } }
         
-        /* โซนกล่องคอมเม้นต์ */
-        .comment-section {
-            background-color: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            max-width: 500px;
-            width: 100%;
-            box-sizing: border-box;
+        .card {
+            background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.9); border-radius: 35px; padding: 40px 25px;
+            width: 85%; max-width: 400px; text-align: center; box-shadow: 0 20px 50px rgba(174, 214, 241, 0.25);
+            position: relative; z-index: 2;
         }
-        .comment-section h2 { color: #2b6cb0; margin-top: 0; text-align: center; }
-        .comment-form input, .comment-form textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #cbd5e0;
-            border-radius: 8px;
-            box-sizing: border-box;
-            font-family: inherit;
+
+        .yt-wrapper {
+            margin-bottom: 20px; border-radius: 15px; overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: inline-block;
         }
-        .comment-form button {
-            width: 100%;
-            padding: 12px;
-            background-color: #3182ce;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background 0.2s;
+
+        .music-btn {
+            background: rgba(255, 255, 255, 0.8); border: 1px solid #bcdbf8; padding: 10px 22px;
+            border-radius: 50px; cursor: pointer; color: #5aa1e3; font-size: 13px; font-weight: 600;
+            margin-bottom: 25px; display: inline-block; transition: 0.3s;
         }
-        .comment-form button:hover { background-color: #2b6cb0; }
-        .comments-list { margin-top: 20px; text-align: left; }
+        .music-btn:hover { background: #eef7ff; transform: scale(1.05); }
+        .header-icon { font-size: 64px; margin-bottom: 10px; display: inline-block; animation: float 3s ease-in-out infinite; }
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
+        h2 { color: #5aa1e3; font-size: 24px; font-weight: 600; margin-top: 10px; margin-bottom: 8px; }
+        .subtitle { color: #8fa0b0; font-size: 13px; margin-bottom: 25px; }
+        hr { border: 0; height: 1px; background: linear-gradient(to right, rgba(188, 227, 248, 0), rgba(188, 227, 248, 0.8), rgba(188, 227, 248, 0)); margin: 25px 0; }
+        ul { list-style: none; padding: 0; text-align: left; margin: 0 auto; width: 100%; }
+        li {
+            margin: 12px 0; font-size: 14px; background: rgba(255, 255, 255, 0.9);
+            padding: 14px 20px; border-radius: 20px; border: 1px solid rgba(238, 247, 255, 0.8);
+            box-shadow: 0 4px 12px rgba(174, 214, 241, 0.1); display: flex; align-items: center;
+        }
+        li span.emoji { font-size: 18px; margin-right: 15px; }
+        li strong { color: #5aa1e3; font-weight: 600; margin-right: 8px; }
+        .note-box { background: rgba(255, 255, 255, 0.8); padding: 20px; border-radius: 24px; border: 1px dashed #bcdbf8; text-align: left; font-size: 13.5px; line-height: 1.6; margin-top: 15px; }
+        .note-box h4 { color: #5aa1e3; margin-top: 0; margin-bottom: 10px; }
+        .note-box li.text-li { background: none; border: none; padding: 2px 0; margin: 6px 0; box-shadow: none; display: block; font-size: 13px; }
+        
+        .btn {
+            background: linear-gradient(135deg, #74b3e9 0%, #4b92db 100%); color: white; border: none; padding: 14px 35px; font-size: 15px; font-weight: bold;
+            border-radius: 50px; cursor: pointer; transition: 0.3s; margin-top: 10px; box-shadow: 0 8px 20px rgba(90, 161, 227, 0.3); display: inline-block; text-decoration: none;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(90, 161, 227, 0.5); }
+        .btn-line { background: linear-gradient(135deg, #6fdc8c 0%, #3ec260 100%); box-shadow: 0 8px 20px rgba(62, 194, 96, 0.25); margin-top: 20px; }
+        
+        /* 💬 สไตล์กล่องข้อความ */
+        .comment-input {
+            width: 90%; padding: 12px; margin: 8px 0; border: 1px solid #bcdbf8;
+            border-radius: 15px; font-family: 'Kanit', sans-serif; font-size: 14px; outline: none;
+            background: rgba(255, 255, 255, 0.9);
+        }
+        .comment-area { height: 80px; resize: none; }
+        .comment-list {
+            margin-top: 20px; text-align: left; max-height: 250px; overflow-y: auto;
+            padding-right: 5px;
+        }
         .comment-item {
-            background: #f7fafc;
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            border-left: 4px solid #3182ce;
+            background: rgba(255, 255, 255, 0.9); padding: 12px 15px; border-radius: 18px;
+            margin-bottom: 10px; border: 1px solid #eef7ff; box-shadow: 0 4px 10px rgba(174,214,241,0.1);
         }
-        .comment-meta { font-size: 0.8rem; color: #a0aec0; margin-top: 5px; }
+        .comment-name { font-weight: bold; color: #5aa1e3; font-size: 13px; margin-bottom: 4px; }
+        .comment-text { font-size: 13.5px; color: #5a6a7a; word-break: break-word; }
+        .comment-time { font-size: 10px; color: #b0c4de; text-align: right; margin-top: 5px; }
+
+        .page { display: none; }
+        .page.active { display: block; }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>เซน (Sen)</h1>
-        <div class="nickname">ยินดีต้อนรับสู่พื้นที่ของผมคัปปป ☁️</div>
-        
-        <div class="game-card">
-            <div class="game-title">🎮 Roblox</div>
-            <div class="game-detail">ชื่อในเกม: plernsuminda</div>
-            <div class="game-detail">เวลาออน: เสาร์-อาทิตย์ (14:00 - 16:00 น.)</div>
+    <div class="card">
+        <div class="yt-wrapper">
+            <div id="youtube-player"></div>
+        </div>
+        <br>
+        <button class="music-btn" onclick="togglePlay()">🎵 Play / Pause BGM</button>
+
+        <!-- 🏠 หน้าแรก -->
+        <div id="page-intro" class="page active">
+            <div class="header-icon">☁️</div>
+            <h2>𓊆 Sen's Space 𓊇</h2>
+            <div class="subtitle">✦ ◌ minimal & cozy space ◌ ✦</div>
+            <hr>
+            <p style="color: #7f8c8d; font-size: 14px; line-height: 1.6; margin-bottom: 25px;">
+                ยินดีต้อนรับสู่พื้นที่มินิมอลสีฟ้าคลีนๆ<br>
+                กดปุ่มด้านล่างเพื่อทำความรู้จักกันนะคับ ✨
+            </p>
+            <button class="btn" onclick="showPage('page-1')" style="margin-bottom: 10px;"> 𓊆 Tap to Enter 𓊇 </button>
+            <br>
+            <!-- ปุ่มใหม่เพื่อไปหน้าคอมเม้นต์ -->
+            <button class="btn" style="background: linear-gradient(135deg, #a3cbf3 0%, #74b3e9 100%);" onclick="showPage('page-comment')"> 𓊆 💬 Guestbook 𓊇 </button>
         </div>
 
-        <div class="game-card">
-            <div class="game-title">🔫 Free Fire</div>
-            <div class="game-detail">UID: 3012117582 (ชื่อในเกม: 👑)</div>
-            <div class="game-detail">เวลาออน: ศุกร์-เสาร์ (19:00 - 21:00 น.)</div>
+        <!-- 🌸 หน้าที่ 1 -->
+        <div id="page-1" class="page">
+            <div style="font-size: 32px; margin-bottom: 10px;">📋</div>
+            <h2>𓊆 Contact Profile 𓊇</h2>
+            <div class="subtitle">ช่องทางการติดต่อของเซนคับ</div>
+            <hr>
+            <ul>
+                <li><span class="emoji">💬</span> <strong>Line :</strong> catminda</li>
+                <li><span class="emoji">📱</span> <strong>Facebook :</strong> เพลิน เพลิน</li>
+                <li><span class="emoji">📸</span> <strong>IG :</strong> pirnname , pirn.name</li>
+                <li><span class="emoji">🎮</span> <strong>Discord :</strong> pire_sun</li>
+            </ul>
+            <div class="note-box">
+                <h4>𓊆 🎮 My Gaming Life 𓊇</h4>
+                <ul style="width: 100%;">
+                    <li class="text-li">💻 ปกติเล่นคอมบ้าง มือถือบ้าง สลับกันไป</li>
+                    <li class="text-li">🌙 วันธรรมดาจะออนเกมช่วงมืดๆ ไม่ดึกมากครับ</li>
+                    <li class="text-li">🎈 วันหยุดออนตอนไหน... แล้วแต่อารมณ์เลย 555</li>
+                </ul>
+            </div>
+            <hr>
+            <button class="btn" onclick="showPage('page-2')">𓊆 Go to Game IDs 𓊇</button>
         </div>
 
-        <div class="game-card">
-            <div class="game-title">⚔️ RoV</div>
-            <div class="game-detail">ชื่อในเกม: ❖ S E N ❖</div>
-            <div class="game-detail">เวลาออน: วันธรรมดาตอนเย็น (17:30 - 18:30 น.)</div>
+        <!-- 🎮 หน้าที่ 2 -->
+        <div id="page-2" class="page">
+            <div style="font-size: 32px; margin-bottom: 10px;">🎮</div>
+            <h2>𓊆 My Game IDs 𓊇</h2>
+            <div class="subtitle">แวะมาเล่นเกมด้วยกันได้น้า</div>
+            <hr>
+            <ul>
+                <li><span class="emoji">🧱</span> <strong>Roblox :</strong> komi_ko24 , g9995h1n</li>
+                <li><span class="emoji">🔥</span> <strong>Free Fire :</strong> Sentakna</li>
+                <li><span class="emoji">⚔️</span> <strong>RoV :</strong> 𝔖𝔢𝔑𝔎𝔞@𝔯𝔦𝔡𝔢</li>
+                <li><span class="emoji">⛏️</span> <strong>Minecraft :</strong> SeNkA4032</li>
+                <li><span class="emoji">🏡</span> <strong>Heartopia :</strong> Uid 361rde9f</li>
+            </ul>
+            <div class="note-box">
+                <h4>✎ 𝙽𝚘𝚝𝚎 :</h4>
+                <p style="margin: 0; font-size: 13px;">
+                    ทักมาชวนเล่นเกมได้ตลอดเลยนะ! อยู่ที่ว่าจะอ่านไหม อารมณ์ดี No Toxic แน่นอน 100%!
+                </p>
+            </div>
+            <a href="https://line.me/ti/p/~catminda" target="_blank" class="btn btn-line">𓊆 💬 Add Line 𓊇</a>
+            <hr>
+            <button class="btn" style="margin-bottom: 15px;" onclick="showPage('page-intro')">𓊆 Back to Home 𓊇</button>
         </div>
 
-        <div class="game-card">
-            <div class="game-title">⛏️ Minecraft</div>
-            <div class="game-detail">ชื่อในเกม: SenPlern_TH</div>
-            <div class="game-detail">เวลาออน: นานๆ ทีเปิดเซิร์ฟเล่นกับเพื่อนคัป</div>
-        </div>
+        <!-- 💬 หน้าใหม่: หน้ากล่องคอมเม้นต์ (Guestbook) -->
+        <div id="page-comment" class="page">
+            <div style="font-size: 32px; margin-bottom: 10px;">💬</div>
+            <h2>𓊆 Guestbook 𓊇</h2>
+            <div class="subtitle">พิมพ์ข้อความทิ้งไว้ทักทายเซนได้นะคับ</div>
+            <hr>
+            
+            <!-- ฟอร์มพิมพ์คอมเม้นต์ -->
+            <input type="text" id="visitor-name" class="comment-input" placeholder="ชื่อของคุณ...">
+            <textarea id="visitor-msg" class="comment-input comment-area" placeholder="พิมพ์ข้อความที่นี่..."></textarea>
+            <button class="btn" style="padding: 10px 25px; font-size: 13px;" onclick="addComment()">ส่งข้อความ ✨</button>
+            
+            <!-- รายการคอมเม้นต์ที่จะแสดง -->
+            <div class="comment-list" id="comment-box">
+                <!-- คอมเม้นต์เริ่มต้นตัวอย่าง -->
+                <div class="comment-item">
+                    <div class="comment-name">✨ เจมีนาย (AI)</div>
+                    <div class="comment-text">ยินดีด้วยกับหน้ากล่องคอมเม้นต์ใหม่สุดน่ารักครับคุณเซน! 🩵☁️</div>
+                    <div class="comment-time">ระบบอัตโนมัติ</div>
+                </div>
+            </div>
 
-        <div class="game-card">
-            <div class="game-title">🏡 Heartopia</div>
-            <div class="game-detail">ชื่อในเกม: เ ป ลิ ญ (ID: 20049581)</div>
-            <div class="game-detail">เวลาออน: ช่วงค่ำๆ ก่อนนอนคัป</div>
+            <hr>
+            <button class="btn" style="margin-bottom: 15px;" onclick="showPage('page-intro')">𓊆 Back to Home 𓊇</button>
         </div>
-    </div>
-
-    <!-- โซนกล่องคอมเม้นต์ -->
-    <div class="comment-section">
-        <h2>💬 กล่องข้อความเยือนเว็บ</h2>
-        <div class="comment-form">
-            <input type="text" id="visitor-name" placeholder="ชื่อของคุณคัป..." required>
-            <textarea id="visitor-msg" rows="3" placeholder="พิมพ์ข้อความทิ้งไว้ได้เลยนะคัปปป..." required></textarea>
-            <button onclick="addComment()">ส่งข้อความ ✨</button>
-        </div>
-        <div class="comments-list" id="comments-container"></div>
     </div>
 
     <script>
-        // ลิงก์ Formspree ของคุณเซนที่ผูกกับ Gmail เรียบร้อยแล้ว ปลอดภัย 100%
-        const FORMSPREE_URL = "https://formspree.io/f/xjgnkjqr"; 
+        function createFall() {
+            const span = document.createElement('span');
+            span.innerHTML = Math.random() > 0.5 ? '☁️' : '✨';
+            span.className = 'snowflake';
+            span.style.left = Math.random() * 100 + 'vw';
+            span.style.fontSize = Math.random() * 20 + 12 + 'px';
+            span.style.opacity = Math.random() * 0.4 + 0.2;
+            span.style.animationDuration = Math.random() * 4 + 6 + 's';
+            document.body.appendChild(span);
+            setTimeout(() => span.remove(), 10000);
+        }
+        setInterval(createFall, 1200);
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        // 📝 ระบบบันทึกและดึงคอมเม้นต์ด้วย LocalStorage (เซฟลงเครื่องคนเปิด)
+        window.onload = function() {
+            loadComments();
+        };
 
         function addComment() {
             var nameInput = document.getElementById("visitor-name");
             var msgInput = document.getElementById("visitor-msg");
+            
             var name = nameInput.value.trim();
             var msg = msgInput.value.trim();
             
@@ -144,29 +215,14 @@
                 return;
             }
             
-            var timeString = new Date().toLocaleString('th-TH', { hour12: false });
-
-            // 🚀 ส่งข้อมูลเข้า Gmail ทันทีผ่าน Formspree
-            fetch(FORMSPREE_URL, {
-                method: 'POST',
-                headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-                body: JSON.stringify({ 
-                    name: name, 
-                    message: msg,
-                    time: timeString 
-                })
-            }).then(response => {
-                if (response.ok) {
-                    alert("ส่งข้อความเรียบร้อย! ข้อมูลวิ่งเข้า Gmail ของคุณเซนแล้วนะคับ ✨");
-                } else {
-                    alert("อุ๊ย! เกิดข้อผิดพลาดนิดหน่อยครับ ลองอีกทีนะ ☁️");
-                }
-            }).catch(err => console.log("Formspree error:", err));
-
-            // บันทึกและแสดงผลบนหน้าเว็บ (Local Storage)
-            var newComment = { name: name, text: msg, time: timeString };
+            var newComment = {
+                name: name,
+                text: msg,
+                time: new Date().toLocaleString('th-TH', { hour12: false })
+            };
+            
             var comments = JSON.parse(localStorage.getItem("sen_comments")) || [];
-            comments.unshift(newComment);
+            comments.unshift(newComment); // เอาคอมเม้นต์ใหม่ขึ้นก่อน
             localStorage.setItem("sen_comments", JSON.stringify(comments));
             
             nameInput.value = "";
@@ -175,23 +231,60 @@
         }
 
         function loadComments() {
-            var commentsContainer = document.getElementById("comments-container");
-            commentsContainer.innerHTML = "";
             var comments = JSON.parse(localStorage.getItem("sen_comments")) || [];
+            var box = document.getElementById("comment-box");
+            
+            // ใส่คอมเม้นต์ตั้งต้นไว้เสมอ
+            var html = `
+                <div class="comment-item">
+                    <div class="comment-name">✨ เจมีนาย (AI)</div>
+                    <div class="comment-text">ยินดีด้วยกับหน้ากล่องคอมเม้นต์ใหม่สุดน่ารักครับคุณเซน! 🩵☁️</div>
+                    <div class="comment-time">ระบบอัตโนมัติ</div>
+                </div>
+            `;
             
             comments.forEach(function(item) {
-                var commentDiv = document.createElement("div");
-                commentDiv.className = "comment-item";
-                commentDiv.innerHTML = "<strong>" + item.name + "</strong>: " + item.text + 
-                                       "<div class='comment-meta'>📅 " + item.time + "</div>";
-                commentsContainer.appendChild(commentDiv);
+                html += `
+                    <div class="comment-item">
+                        <div class="comment-name">👤 ${escapeHtml(item.name)}</div>
+                        <div class="comment-text">${escapeHtml(item.text)}</div>
+                        <div class="comment-time">${item.time}</div>
+                    </div>
+                `;
+            });
+            
+            box.innerHTML = html;
+        }
+
+        function escapeHtml(text) {
+            return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+        }
+
+        // ระบบ YouTube
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-player', {
+                height: '120',
+                width: '200',
+                videoId: 'rfIKmv46DRg',
+                playerVars: { 'autoplay': 0, 'loop': 1, 'playlist': 'rfIKmv46DRg', 'controls': 1 }
             });
         }
 
-        // โหลดคอมเม้นต์ขึ้นมาโชว์ตอนเปิดหน้าเว็บ
-        window.onload = loadComments;
+        function togglePlay() {
+            if (!player) return;
+            var state = player.getPlayerState();
+            if (state == 1) {
+                player.pauseVideo();
+            } else {
+                player.playVideo();
+            }
+        }
     </script>
-
 </body>
 </html>
-
